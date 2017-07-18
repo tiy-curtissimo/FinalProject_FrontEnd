@@ -2,9 +2,7 @@ import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
-
 import { NgForm } from '@angular/forms';
-
 import { DataService } from '../data.service'
 import { fadeInAnimation } from '../animations/fade-in.animation';
 
@@ -16,27 +14,19 @@ import { fadeInAnimation } from '../animations/fade-in.animation';
 })
 export class StudentFormComponent implements OnInit {
 
+  //this is needed for form on the page so we can do things like validation
+  //we can discuss this in detail when needed
   studentForm: NgForm;
-  @ViewChild('studentForm') currentForm: NgForm;
+  @ViewChild('studentForm')
+  currentForm: NgForm;
 
+  //handle status messages
+  //scenarios: failed to get/save/edit record
   successMessage: string;
   errorMessage: string;
 
+  //what we actually got from the service when finding by email
   student: object;
-  majors: object[];
-
-  getRecordForEdit(){
-    this.route.params
-      .switchMap((params: Params) => this.dataService.getRecord("student", +params['id']))
-      .subscribe(student => this.student = student);
-  }
-
-  getMajors(){
-    this.dataService.getRecords("major")
-      .subscribe(
-        majors => {this.majors = majors},
-        error =>  this.errorMessage = <any>error);
-  }
 
   constructor(
     private dataService: DataService,
@@ -47,14 +37,24 @@ export class StudentFormComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .subscribe((params: Params) => {
-        (+params['id']) ? this.getRecordForEdit() : null;
+        (params['email']) ? this.getRecordForEdit() : null;
       });
-        this.getMajors();
   }
 
+  getRecordForEdit(){
+    console.log("hola")
+    this.route.params
+      .switchMap((params: Params) => this.dataService.getStudentRecordByEmail("student", params['email']))
+      .subscribe(
+        student => this.student = student,
+        error =>  this.errorMessage = <any>error);
+  }
+  
+  //saves student to the databbase using the service to call the api
+  //if we had a id on the form and it is a number then edit otherwise create
   saveStudent(student: NgForm){
-    if(typeof student.value.student_id === "number"){
-      this.dataService.editRecord("student", student.value, student.value.student_id)
+    if(typeof student.value.id === "number"){
+      this.dataService.editStudentRecord("student", student.value, student.value.student_id)
           .subscribe(
             student => this.successMessage = "Record updated successfully",
             error =>  this.errorMessage = <any>error);
@@ -65,9 +65,10 @@ export class StudentFormComponent implements OnInit {
             error =>  this.errorMessage = <any>error);
             this.student = {};
     }
-
   }
-ngAfterViewChecked() {
+
+  //everything below here is form validation boiler plate
+  ngAfterViewChecked() {
     this.formChanged();
   }
 
@@ -75,11 +76,11 @@ ngAfterViewChecked() {
     this.studentForm = this.currentForm;
     this.studentForm.valueChanges
       .subscribe(
-        data => this.onValueChanged(data)
+        data => this.onValueChanged()
       );
   }
 
-  onValueChanged(data?: any) {
+  onValueChanged() {
     let form = this.studentForm.form;
 
     for (let field in this.formErrors) {
@@ -96,31 +97,41 @@ ngAfterViewChecked() {
     }
   }
 
+  //fields that need to be validated
   formErrors = {
+    'email': '',
     'first_name': '',
     'last_name': '',
-    'sat': '',
-    'start_date': '',
+    'university': '',
+    'major': '',
     'gpa': ''
   };
 
   validationMessages = {
-    'first_name': {
+    'email': {
+      'required': 'Email is required.',
+      'minlength': 'Email must be at least 2 characters long.',
+      'maxlength': 'Email cannot be more than 50 characters long.'
+    },
+    'firstName': {
       'required': 'First name is required.',
       'minlength': 'First name must be at least 2 characters long.',
       'maxlength': 'First name cannot be more than 30 characters long.'
     },
-    'last_name': {
+    'lastName': {
       'required': 'Last name is required.',
       'minlength': 'Last name must be at least 2 characters long.',
       'maxlength': 'Last name cannot be more than 30 characters long.'
     },
-    'sat': {
-      'pattern': 'Sat score must be between 400 and 1600',
-      'maxlength': 'Sat cannot be more than 4 characters long.'
+    'university': {
+      'required': 'University is required.',
+      'minlength': 'University must be at least 2 characters long.',
+      'maxlength': 'University cannot be more than 30 characters long.'
     },
-    'start_date': {
-      'pattern': 'Start date should be in the following format: YYYY-MM-DD'
+    'major': {
+      'required': 'Major is required.',
+      'minlength': 'Major must be at least 2 characters long.',
+      'maxlength': 'Major cannot be more than 30 characters long.'
     },
     'gpa': {
       'pattern': 'GPA must be a decimal'
