@@ -2,12 +2,12 @@
   <ol class="breadcrumb">
       <li><a routerLink="/home">Home</a></li>
       <li><a routerLink="/student">Student Registration</a></li>
-      <li class="active">Manage Student</li>
+      <li class="active">Student Registration</li>
   </ol>
 
-<br /><br /><br />
+<br /><br /><br /><br /><br />
 <a class="btn btn-primary" routerLink="/student">Return to Student Login</a>
-<h1>Student Registration</h1>
+<!-- <h1>Student Registration</h1> -->
 
 <div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage" id="deletemsg">
     {{errorMessage}} {{successMessage}}
@@ -16,23 +16,29 @@
     </button>
 </div>
 
-<!--  private int studentId;
-      private String firstName;
-      private String lastName;
-      private String university;
-      private String major;
-      private Float gpa;
-      private String email;
-      private String phoneNumber;
-      private String graduationDate; 
+<br /><br />
+
+<!-- BEGIN FORM
+
+  private int studentId;
+	private String firstName;
+	private String lastName;
+	private String university;
+	private String major;
+	private Float gpa;
+	private String email;
+	private String phoneNumber;
+	private String graduationMonth;
+	private String graduationYear;
+
 -->
 
 <form novalidate (ngSubmit)="saveStudent(studentForm)"  #studentForm="ngForm" class="form-horizontal">
-  <input [ngModel]="student?.studentId" ngModel #student_email="ngModel" type="hidden" name="student_studentId">
+  <input [ngModel]="student?.studentId" ngModel #studentId="ngModel" type="hidden" name="studentId">
 
   <div class="form-group">
     <label for="email" class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-10">
+    <div class="col-sm-4">
       <input [ngModel]="student?.email" ngModel #first_name="ngModel" type="text" class="form-control" id="email" name="email" placeholder="Email" required minlength="2" maxlength="50">
          <span *ngIf="formErrors.email" class="text-danger">
           {{ formErrors.email }}
@@ -42,7 +48,7 @@
   
   <div class="form-group">
     <label for="firstName" class="col-sm-2 control-label">First Name</label>
-    <div class="col-sm-10">
+    <div class="col-sm-4">
       <input [ngModel]="student?.firstName" ngModel #first_name="ngModel" type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required minlength="2" maxlength="30">
         <span *ngIf="formErrors.firstName" class="text-danger">
           {{ formErrors.firstName }}
@@ -52,7 +58,7 @@
 
   <div class="form-group">
     <label for="lastName" class="col-sm-2 control-label">Last Name</label>
-    <div class="col-sm-10">
+    <div class="col-sm-4">
       <input [ngModel]="student?.lastName" ngModel #last_name="ngModel" type="text" class="form-control" id="lastName" name="lastName"  placeholder="lastName" required minlength="2" maxlength="30">
       <span *ngIf="formErrors.lastName" class="text-danger">
           {{ formErrors.lastName }}
@@ -62,17 +68,27 @@
 
   <div class="form-group">
     <label for="university" class="col-sm-2 control-label">University</label>
-    <div class="col-sm-10">
-      <input [ngModel]="student?.university" ngModel #last_name="ngModel" type="text" class="form-control" id="university" name="university"  placeholder="University" required minlength="2" maxlength="50">
-      <span *ngIf="formErrors.university" class="text-danger">
-          {{ formErrors.university }}
-      </span>
+    <div class="col-sm-4">
+      <select [ngModel]="student?.university" ngModel #major_id="ngModel" class="form-control" name="university" id="university" required>
+        <option value="Indiana University">Indiana University</option>
+        <option value="Indiana State University">Indiana State University</option>
+        <option value="Purdue University">Purdue University</option>
+        <option value="DePauw University">DePauw University</option>
+        <option value="Saint Mary-of-the-Woods College">Saint Mary-of-the-Woods College</option>
+        <option value="University of Notre Dame ">University of Notre Dame</option>
+        <option value="Indiana University–Purdue University Indianapolis">Indiana University–Purdue University Indianapolis</option>
+        <option value="Ivy Tech">Ivy Tech</option>
+        <option value="Butler University">Butler University</option>        
+        <option value="Ball State University">Ball State University</option>        
+        <option value="Rose-Hulman Institute of Technology">Rose-Hulman Institute of Technology</option>
+        <option value="University of Evansville">University of Evansville</option>        
+      </select>
     </div>
   </div>
 
   <div class="form-group">
     <label for="major" class="col-sm-2 control-label">Major</label>
-    <div class="col-sm-10">
+    <div class="col-sm-4">
       <select [ngModel]="student?.major" ngModel #major_id="ngModel" class="form-control" name="major" id="major" required>
         <option value="Mathematics">Mathematics</option>
         <option value="History">History</option>
@@ -92,8 +108,8 @@
 
     <div class="form-group">
       <label for="gpa" class="col-sm-2 control-label">GPA</label>
-      <div class="col-sm-10">
-        <input [ngModel]="student?.gpa" ngModel #gpa="ngModel" type="text" class="form-control" id="gpa" name="gpa" placeholder="4.0" maxLength="4" pattern="\d+\.\d+">
+      <div class="col-sm-4">
+        <input [ngModel]="student?.gpa" ngModel #gpa="ngModel" type="text" class="form-control" id="gpa" name="gpa" placeholder="4.0" required maxLength="4" pattern="\d+\.\d+">
         <span *ngIf="formErrors.gpa" class="text-danger">
           {{ formErrors.gpa }}
         </span>
@@ -102,7 +118,7 @@
 
   <div class="form-group">
     <label for="phoneNumber" class="col-sm-2 control-label">Phone Number</label>
-    <div class="col-sm-10">
+    <div class="col-sm-4">
       <input [ngModel]="student?.phoneNumber" ngModel #last_name="ngModel" type="text" class="form-control" id="phoneNumber" name="phoneNumber"  placeholder="###-###-####" required minlength="2" maxlength="15">
       <span *ngIf="formErrors.phoneNumber" class="text-danger">
           {{ formErrors.phoneNumber }}
@@ -111,9 +127,9 @@
   </div>
 
   <div class="form-group">
-    <label for="graduation_mm" class="col-sm-2 control-label">Graduation MM</label>
-    <div class="col-sm-10">
-      <select [ngModel]="student?.graduation_mm" ngModel #major_id="ngModel" class="form-control" name="graduation_mm" id="graduation_mm" required>
+    <label for="graduationMonth" class="col-sm-2 control-label">Graduation MM</label>
+    <div class="col-sm-4">
+      <select [ngModel]="student?.graduationMonth" ngModel #major_id="ngModel" class="form-control" name="graduationMonth" id="graduationMonth" required>
         <option value="January">January</option>
         <option value="February">February</option>
         <option value="March">March</option>
@@ -131,9 +147,9 @@
   </div>
 
   <div class="form-group">
-    <label for="graduation_yyyy" class="col-sm-2 control-label">Graduation YYYY</label>
-    <div class="col-sm-10">
-      <select [ngModel]="student?.graduation_yyyy" ngModel #major_id="ngModel" class="form-control" name="graduation_yyyy" id="graduation_yyyy" required>
+    <label for="graduationYear" class="col-sm-2 control-label">Graduation YYYY</label>
+    <div class="col-sm-4">
+      <select [ngModel]="student?.graduationYear" ngModel #major_id="ngModel" class="form-control" name="graduationYear" id="graduationYear" required>
         <option value="2022">2022</option>        
         <option value="2021">2021</option>
         <option value="2020">2020</option>

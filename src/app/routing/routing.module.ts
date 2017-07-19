@@ -26,7 +26,6 @@ const routes: Routes = [
   { path: 'home',  component: HomeComponent },
 
   { path: 'student',  component: StudentComponent },  
-
   { path: 'student/edit/:email', component: StudentFormComponent },
   { path: 'student/add', component: StudentFormComponent }
 
