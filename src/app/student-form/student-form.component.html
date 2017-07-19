@@ -104,15 +104,15 @@
     </div>
   </div>
 
-    <div class="form-group">
-      <label for="gpa" class="col-sm-2 control-label">GPA</label>
-      <div class="col-sm-4">
-        <input [ngModel]="student?.gpa" ngModel #gpa="ngModel" type="text" class="form-control" id="gpa" name="gpa" placeholder="4.0" required maxLength="5" pattern="\d+\.\d+">
-        <span *ngIf="formErrors.gpa" class="text-danger">
+  <div class="form-group">
+    <label for="gpa" class="col-sm-2 control-label">GPA</label>
+    <div class="col-sm-4">
+      <input [ngModel]="student?.gpa" ngModel #gpa="ngModel" type="text" class="form-control" id="gpa" name="gpa" placeholder="4.0" required maxLength="5" pattern="\d+\.\d+">
+      <span *ngIf="formErrors.gpa" class="text-danger">
           {{ formErrors.gpa }}
-        </span>
-      </div>
+      </span>
     </div>
+  </div>
 
   <div class="form-group">
     <label for="phoneNumber" class="col-sm-2 control-label">Phone Number</label>
@@ -179,9 +179,6 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button [disabled]="!studentForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
-
-      <!-- <a type="submit" class="btn btn-primary">Submit</a> -->
-
     </div>
   </div>
 

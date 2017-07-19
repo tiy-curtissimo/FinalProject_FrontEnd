@@ -59,6 +59,16 @@ export class DataService {
     }
 
     // RECRUITER GET, PUT, & POST
+    authenticateLogin(endpoint: string, enterprise_id:string, password:string): Observable<object> {
+        let apiUrl = `${this.baseUrl}${endpoint}/${enterprise_id}`;
+        let apiUrl2 = apiUrl + "&" + password;
+        console.log(apiUrl2);
+        
+        return this.http.get(apiUrl2)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     getRecruiterRecord(endpoint: string, enterprise_id:string): Observable<object> {
         let apiUrl = `${this.baseUrl}${endpoint}/${enterprise_id}`;
         return this.http.get(apiUrl)
