@@ -14,7 +14,14 @@
 </div> 
 
 <br><br><br><br><br><br>
+<!-- <h2>Student Login</h2> -->
+
+        <!-- two-day data bind to email property in student.component.ts -->
         <input type="text" [(ngModel)]="email"/>
+        <!-- 
+          {{email}}
+         -->
         <a class="btn btn-primary" [routerLink]="[ '/student/edit/', email ]">Submit</a>
+
 
 </section>

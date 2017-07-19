@@ -3,9 +3,7 @@ import { Component, OnInit, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
-import { DataService } from '../data.service';
-import { Header } from 'primeng/primeng';
-import { Footer } from 'primeng/primeng';
+import { DataService } from '../data.service'
 import { fadeInAnimation } from '../animations/fade-in.animation';
 
 @Component({
@@ -69,18 +67,8 @@ export class RecruiterFormComponent implements OnInit {
     }
   }
 
-  // // everything below here is form validation boiler plate
-  // ngAfterViewChecked() {
-  //   this.formChanged();
-  // }
+  // everything below here is form validation boiler plate
 
-  // formChanged() {
-  //   this.recruiterForm = this.currentForm;
-  //   this.recruiterForm.valueChanges
-  //     .subscribe(
-  //       data => this.onValueChanged(data)
-  //     );
-  // }
 
   onValueChanged(data?: any) {
     let form = this.recruiterForm.form;

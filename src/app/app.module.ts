@@ -10,12 +10,14 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { AppRoutingModule } from './routing/routing.module';
 import { HomeComponent } from './home/home.component';
 import { DataService } from './data.service';
-import { DataTableModule, SharedModule } from 'primeng/primeng';
+import { DataTableModule, SharedModule, MultiSelectModule } from 'primeng/primeng';
 
 import { StudentComponent } from './student/student.component';
 import { StudentFormComponent } from './student-form/student-form.component';
 import { RecruiterComponent } from './recruiter/recruiter.component';
 import { RecruiterFormComponent } from './recruiter-form/recruiter-form.component';
+import { RegisterComponent } from './register/register.component';
+
 
 
 
@@ -31,8 +33,7 @@ import { RecruiterFormComponent } from './recruiter-form/recruiter-form.componen
     StudentFormComponent,
     RecruiterComponent,
     RecruiterFormComponent,
-    DataTableModule,
-    SharedModule
+    RegisterComponent
 
   ],
   imports: [
@@ -43,7 +44,8 @@ import { RecruiterFormComponent } from './recruiter-form/recruiter-form.componen
     BrowserAnimationsModule,
     FormsModule,
     DataTableModule,
-    SharedModule
+    SharedModule,
+    MultiSelectModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

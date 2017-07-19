@@ -1,0 +1,48 @@
+<section @fadeInAnimation>
+  <ol class="breadcrumb">
+    <li><a routerLink="/home">Home</a></li>
+    <li class="active">Recruiter Registration</li>
+    <li><a class="btn btn-primary" routerLink="/recruiter">Return to Recruiter Login</a></li>
+</ol>
+
+<br/>
+
+ <div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage" id="deletemsg">
+    {{errorMessage}} {{successMessage}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div> 
+
+<br><br><br><br>
+
+<h1>Recruiter Registration</h1>
+
+<br><br>
+
+    <div class="form-group">
+    <label for="enterprise_id" class="col-sm-22 control-label">N Number </label>
+    <input type="text" [(ngModel)]="enterprise_id"/>
+    </div>
+    <div class="form-group">
+    <label for="password" class="col-sm-22 control-label">Password </label>
+    <input type="text" [(ngModel)]="password"/>
+    </div>
+    <div class="form-group">
+    <label for="email" class="col-sm-22 control-label">Email </label>
+    <input type="text" [(ngModel)]="email"/>
+    </div>
+    <div class="form-group">
+    <label for="first_name" class="col-sm-22 control-label">First Name</label>
+    <input type="text" [(ngModel)]="first_name"/>
+    </div>
+    <div class="form-group">
+    <label for="last_name" class="col-sm-22 control-label">Last Name</label>
+    <input type="text" [(ngModel)]="last_name"/>
+    </div>
+
+    <br><br>
+
+    <a class="btn btn-primary" routerLink="/recruiter" >Register</a>
+    
+</section>

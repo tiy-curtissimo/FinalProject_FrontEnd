@@ -1,11 +1,15 @@
+
 <section @fadeInAnimation>
   <ol class="breadcrumb">
     <li><a routerLink="/home">Home</a></li>
     <li><a routerLink="/recruiter">Recruiter</a></li>
     <li class="active">Review Prospects</li>
+    <li><a class="btn btn-primary" routerLink="/recruiter">Return to Recruiter Login</a></li>
 </ol>
 
-<br/>
+<br><br><br><br><br>
+
+<h1>Prospect Review</h1>
 
 <div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage" id="deletemsg">
     {{errorMessage}} {{successMessage}}
@@ -14,8 +18,6 @@
     </button>
 </div>
 
-<br><br><br>
-<h2>Prospects</h2>
 
 <br>
 
