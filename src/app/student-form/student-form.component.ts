@@ -42,7 +42,7 @@ export class StudentFormComponent implements OnInit {
   }
 
   getRecordForEdit(){
-    console.log("hola")
+    //console.log("hola")
     this.route.params
       .switchMap((params: Params) => this.dataService.getStudentRecordByEmail("student", params['email']))
       .subscribe(
@@ -53,13 +53,16 @@ export class StudentFormComponent implements OnInit {
   //saves student to the databbase using the service to call the api
   //if we had a id on the form and it is a number then edit otherwise create
   saveStudent(student: NgForm){
-    if(typeof student.value.id === "number"){
-      this.dataService.editStudentRecord("student", student.value, student.value.student_id)
+    console.log("studentId = " + student.value.studentId)
+    if(typeof student.value.studentId === "number"){
+      console.log("Update by ID " + student.value.studentId)
+      this.dataService.editStudentRecord("student", student.value, student.value.studentId)
           .subscribe(
             student => this.successMessage = "Record updated successfully",
             error =>  this.errorMessage = <any>error);
     }else{
-      this.dataService.addRecord("student", student.value)
+      console.log("Adding Student")
+      this.dataService.addStudentRecord("student", student.value)
           .subscribe(
             student => this.successMessage = "Record added successfully",
             error =>  this.errorMessage = <any>error);
@@ -97,44 +100,65 @@ export class StudentFormComponent implements OnInit {
     }
   }
 
+  // private int studentId;
+	// private String firstName;
+	// private String lastName;
+	// private String university;
+	// private String major;
+	// private Float gpa;
+	// private String email;
+	// private String phoneNumber;
+	// private String graduationMonth;
+	// private String graduationYear;
+	
   //fields that need to be validated
   formErrors = {
     'email': '',
-    'first_name': '',
-    'last_name': '',
+    'firstName': '',
+    'lastName': '',
     'university': '',
     'major': '',
-    'gpa': ''
+    'gpa': '',
+    'phoneNumber': '',
+    'graduationMonth': '',
+    'graduationYear': ''
   };
 
   validationMessages = {
     'email': {
-      'required': 'Email is required.',
-      'minlength': 'Email must be at least 2 characters long.',
-      'maxlength': 'Email cannot be more than 50 characters long.'
+      'required': 'Email is required',
+      'minlength': 'Email must be at least 2 characters long',
+      'maxlength': 'Email cannot be more than 50 characters long'
     },
     'firstName': {
-      'required': 'First name is required.',
-      'minlength': 'First name must be at least 2 characters long.',
-      'maxlength': 'First name cannot be more than 30 characters long.'
+      'required': 'First name is required',
+      'minlength': 'First name must be at least 2 characters long',
+      'maxlength': 'First name cannot be more than 30 characters long'
     },
     'lastName': {
-      'required': 'Last name is required.',
-      'minlength': 'Last name must be at least 2 characters long.',
-      'maxlength': 'Last name cannot be more than 30 characters long.'
+      'required': 'Last name is required',
+      'minlength': 'Last name must be at least 2 characters long',
+      'maxlength': 'Last name cannot be more than 30 characters long'
     },
     'university': {
-      'required': 'University is required.',
-      'minlength': 'University must be at least 2 characters long.',
-      'maxlength': 'University cannot be more than 30 characters long.'
+      'required': 'University is required'
     },
     'major': {
-      'required': 'Major is required.',
-      'minlength': 'Major must be at least 2 characters long.',
-      'maxlength': 'Major cannot be more than 30 characters long.'
+      'required': 'Major is required'
     },
     'gpa': {
       'pattern': 'GPA must be a decimal'
-    }
+    },
+    'graduationMonth': {
+      'required': 'Graduation Month is required'
+    },
+    'graduationYear': {
+      'required': 'Graduation Year is required'
+    },
+    'phoneNumber': {
+      'required': 'Phone Number is required.',
+      'minlength': 'Phone Number must be at least 2 characters long',
+      'maxlength': 'Phone Number cannot be more than 15 characters long'
+    },
   };
 }
