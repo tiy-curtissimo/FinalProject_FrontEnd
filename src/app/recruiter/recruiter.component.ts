@@ -4,14 +4,14 @@ import { fadeInAnimation } from '../animations/fade-in.animation';
 
 
 @Component({
-  selector: 'app-student',
-  templateUrl: './student.component.html',
-  styleUrls: ['./student.component.css'],
+  selector: 'app-recruiter',
+  templateUrl: './recruiter.component.html',
+  styleUrls: ['./recruiter.component.css'],
   animations: [fadeInAnimation]
 })
 
-export class StudentComponent {
+export class RecruiterComponent {
 
-  email: string;
+  enterprise_id: string;
 
 }

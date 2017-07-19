@@ -1,0 +1,35 @@
+.navbar{
+    height: 110px;
+    background: linear-gradient(to bottom,  #7d7e7d 0%,#0000FF 8%,#0e0e0e 100%);
+}
+
+.navbar-right li a {
+    padding-top: 25px;
+  line-height: 50px;
+  text-decoration: none;
+  color: #FF8C00;
+  font-size: 17px;
+}
+.navbar-right li a:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.navbar-text {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    font-size: 52px;
+    color: silver;
+    margin: auto;
+    padding-top: 10px;
+    text-shadow: 1px 1px white;
+}
+
+.img-circle{
+  margin-top: -6%;
+  margin-left: 15%; 
+  margin-right: 15%;
+}
+
