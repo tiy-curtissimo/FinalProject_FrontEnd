@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, ViewChild }      from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../data.service'
@@ -31,7 +31,8 @@ export class StudentFormComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -68,6 +69,7 @@ export class StudentFormComponent implements OnInit {
             error =>  this.errorMessage = <any>error);
             this.student = {};
     }
+         this.router.navigate(['/quiz', student.value.email]); 
   }
 
   //everything below here is form validation boiler plate
@@ -127,8 +129,7 @@ export class StudentFormComponent implements OnInit {
   validationMessages = {
     'email': {
       'required': 'Email is required',
-      'minlength': 'Email must be at least 2 characters long',
-      'maxlength': 'Email cannot be more than 50 characters long'
+      'pattern': 'Invalid Email Format'
     },
     'firstName': {
       'required': 'First name is required',

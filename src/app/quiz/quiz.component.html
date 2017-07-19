@@ -1,0 +1,23 @@
+<section @fadeInAnimation>
+  <ol class="breadcrumb">
+    <li><a routerLink="/home">Home</a></li>
+    <li class="active">Student Quiz</li>
+</ol>
+
+<br/><br/><br/><br/>
+<h1>TAKE A QUIZ!!!</h1>
+<br/>
+
+ <div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage" id="deletemsg">
+    {{errorMessage}} {{successMessage}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div> 
+
+<!-- two-day data bind to studentId property in student.component.ts -->
+ <input type="text" [(ngModel)]="email"/>
+<a class="btn btn-primary" [routerLink]="[ '/student']">Submit Answers</a> 
+
+
+</section>
