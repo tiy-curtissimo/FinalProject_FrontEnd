@@ -12,6 +12,8 @@ import { StudentFormComponent }   from '../student-form/student-form.component';
 // import { AssignmentFormComponent }   from '../assignment-form/assignment-form.component';
 import { RecruiterComponent }   from '../recruiter/recruiter.component';
 import { RecruiterFormComponent }   from '../recruiter-form/recruiter-form.component';
+import { RegisterComponent }   from '../register/register.component';
+
 // import { MajorComponent }   from '../major/major.component';
 // import { MajorFormComponent }   from '../major-form/major-form.component';
 // import { StudentClassComponent }   from '../student-class/student-class.component';
@@ -40,8 +42,10 @@ const routes: Routes = [
   // { path: 'assignment/edit/:id', component: AssignmentFormComponent },
   // { path: 'assignment/add', component: AssignmentFormComponent },
   { path: 'recruiter',  component: RecruiterComponent },
-  { path: 'recruiter/login/:enterprise_id', component: RecruiterFormComponent },
-  { path: 'recruiter/register', component: RecruiterFormComponent },
+  { path: 'recruiter/username/:enterprise_id', component: RecruiterFormComponent },
+  { path: 'recruiter/add', component: RecruiterFormComponent },
+  { path: 'register/add',  component: RegisterComponent },
+
   // { path: 'major',  component: MajorComponent },
   // { path: 'major/edit/:id', component: MajorFormComponent },
   // { path: 'major/add', component: MajorFormComponent },

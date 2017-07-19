@@ -69,17 +69,7 @@ export class RecruiterFormComponent implements OnInit {
   }
 
   // everything below here is form validation boiler plate
-  ngAfterViewChecked() {
-    this.formChanged();
-  }
 
-  formChanged() {
-    this.recruiterForm = this.currentForm;
-    this.recruiterForm.valueChanges
-      .subscribe(
-        data => this.onValueChanged(data)
-      );
-  }
 
   onValueChanged(data?: any) {
     let form = this.recruiterForm.form;

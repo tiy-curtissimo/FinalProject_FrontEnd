@@ -16,6 +16,8 @@ import { StudentComponent } from './student/student.component';
 import { StudentFormComponent } from './student-form/student-form.component';
 import { RecruiterFormComponent } from './recruiter-form/recruiter-form.component';
 import { RecruiterComponent } from './recruiter/recruiter.component';
+import { RegisterComponent } from './register/register.component';
+
 
 // import { GradeComponent } from './grade/grade.component';
 // import { GradeFormComponent } from './grade-form/grade-form.component';
@@ -43,7 +45,9 @@ import { RecruiterComponent } from './recruiter/recruiter.component';
     StudentComponent,
     StudentFormComponent,
     RecruiterFormComponent,
-    RecruiterComponent
+    RecruiterComponent,
+    RegisterComponent
+
     // GradeComponent,
     // GradeFormComponent,
     // ClassFormComponent,

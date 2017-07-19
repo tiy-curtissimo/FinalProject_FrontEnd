@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
 
-    private baseUrl = 'http://localhost:8080'
+    private baseUrl = 'http://localhost:8080/'
 
     constructor (private http: Http) {}
 
@@ -20,7 +20,7 @@ export class DataService {
     // executed from the login screen
     getStudentRecordByEmail(endpoint: string, email:string): Observable<object> {
         console.log(email);
-        let apiUrl = `${this.baseUrl}${endpoint}/${email}`;
+        let apiUrl = `${this.baseUrl}${endpoint}/${email}/`;
         return this.http.get(apiUrl)
             .map(this.extractData)
             .catch(this.handleError);
@@ -72,14 +72,14 @@ export class DataService {
     }
 
 
-   getRecruiterRecord(endpoint: string, n_number): Observable<object> {
-        let apiUrl = `${this.baseUrl}${endpoint}/${n_number}`;
+   getRecruiterRecord(endpoint: string, enterprise_id:string): Observable<object> {
+        let apiUrl = `${this.baseUrl}${endpoint}/${enterprise_id}`;
         return this.http.get(apiUrl)
             .map(this.extractData)
             .catch(this.handleError);
     }
     addRecruiterRecord(endpoint: string, record:object): Observable<object> {
-    let apiUrl = `${this.baseUrl}${endpoint}`;
+    let apiUrl = `${this.baseUrl}${endpoint}/add`;
     console.log(apiUrl)
     return this.http.post(apiUrl, record)
         .map(this.extractData)

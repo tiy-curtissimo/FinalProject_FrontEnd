@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { StudentComponent } from './student/student.component';
 import { RecruiterComponent } from './recruiter/recruiter.component';
+import { RegisterComponent } from './register/register.component';
 // import { GradeComponent } from './grade/grade.component'
 // import { ClassComponent } from './class/class.component'
 // import { AssignmentComponent } from './assignment/assignment.component'
