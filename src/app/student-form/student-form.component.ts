@@ -24,6 +24,7 @@ export class StudentFormComponent implements OnInit {
   //scenarios: failed to get/save/edit record
   successMessage: string;
   errorMessage: string;
+  student_id: string;
 
   //what we actually got from the service when finding by email
   student: object;
@@ -54,7 +55,6 @@ export class StudentFormComponent implements OnInit {
   //saves student to the databbase using the service to call the api
   //if we had a id on the form and it is a number then edit otherwise create
   saveStudent(student: NgForm){
-    console.log("studentId = " + student.value.studentId)
     if(typeof student.value.studentId === "number"){
       console.log("Update by ID " + student.value.studentId)
       this.dataService.editStudentRecord("student", student.value, student.value.studentId)
@@ -69,7 +69,8 @@ export class StudentFormComponent implements OnInit {
             error =>  this.errorMessage = <any>error);
             this.student = {};
     }
-         this.router.navigate(['/quiz', student.value.email]); 
+        console.log("re-routing with studentId = " + student.value.studentId);
+        this.router.navigate( ['/quiz', student.value.studentId] ); 
   }
 
   //everything below here is form validation boiler plate

@@ -14,7 +14,14 @@ import { fadeInAnimation } from '../animations/fade-in.animation';
 })
 export class QuizComponent implements OnInit {
 
-  email: string;
+  studentId: string;
+
+  errorMessage: string;
+  successMessage: string;
+
+  questions: any[];
+
+  mode = 'Observable';
 
   constructor(
     private dataService: DataService,
@@ -23,11 +30,23 @@ export class QuizComponent implements OnInit {
   ) {}
 
   ngOnInit() { 
+
+    this.getQuestions();
+
     this.route.params
       .subscribe((params: Params) => {
-        (params['email']) ? this.email = params['email'] : null;
+        ( params['studentId'] ) ? this.studentId = params['studentId'] : null;
     });
-    console.log("incoming email: " + this.email);
+    console.log("incoming studentId: " + this.studentId);
+    
+  }
+
+  getQuestions() {
+    // http://localhost:8080/question/getQuestions
+    this.dataService.getRecords("question", "getQuestions")
+      .subscribe(
+        questions => this.questions = questions,
+        error =>  this.errorMessage = <any>error);
   }
 
 }

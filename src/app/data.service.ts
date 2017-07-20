@@ -17,11 +17,15 @@ export class DataService {
     // ----------------------   --------  ---------------------
     // http://localhost:8080/   student   /dford@gmail.com/
     // http://localhost:8080/student/dford@gmail.com/
+    // http://localhost:8080/question/getQuestions
     // IMPORTANT: WHEN SENDING EMAIL ADDRESS IT MUST END WITH A '/'
+
+// **************************************************************************************
+//                               STUDENTS PATH                                          *
+// **************************************************************************************
 
     // executed from the login screen
     getStudentRecordByEmail(endpoint: string, email:string): Observable<object> {
-        //console.log(email);
         let apiUrl = `${this.baseUrl}${endpoint}/${email}/`;
         console.log(apiUrl);
         return this.http.get(apiUrl)
@@ -58,12 +62,23 @@ export class DataService {
             .catch(this.handleError);
     }
 
-    // RECRUITER GET, PUT, & POST
-    authenticateLogin(endpoint: string, enterprise_id:string, password:string): Observable<object> {
+    // performed from quiz.component.ts to obtain quiz questions
+    getRecords(endpoint: string, option: string): Observable<any[]> {
+        let apiUrl = this.baseUrl+endpoint+"/"+option
+        console.log(apiUrl);
+        return this.http.get(apiUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+// **************************************************************************************
+//                               RECRUITER PATH                                         *
+// **************************************************************************************
+
+    authenticateLogin(endpoint: string, record:object, enterprise_id:string, password:string): Observable<object> {
         let apiUrl = `${this.baseUrl}${endpoint}/${enterprise_id}`;
         let apiUrl2 = apiUrl + "&" + password;
         console.log(apiUrl2);
-        
         return this.http.get(apiUrl2)
             .map(this.extractData)
             .catch(this.handleError);
@@ -91,15 +106,19 @@ export class DataService {
             .catch(this.handleError);
     }
 
+// **************************************************************************************
+//                               EVENTS PATH                                           *
+// **************************************************************************************
 
 
 
-    getRecords(endpoint: string): Observable<any[]> {
-        let apiUrl = this.baseUrl+endpoint + "/all";
-        return this.http.get(apiUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
+
+
+
+// **************************************************************************************
+//                               HOUSEKEEPING                                           *
+// **************************************************************************************
+
     deleteRecord(endpoint: string, id:number): Observable<object> {
         let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
         return this.http.delete(apiUrl)
@@ -114,10 +133,9 @@ export class DataService {
             .catch(this.handleError);
     }
 
-
-
     private extractData(res: Response) {
         let results = res.json();
+        console.log(results);
         return results || [];
     }
 

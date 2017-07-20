@@ -49,9 +49,15 @@ export class StudentComponent implements OnInit {
 
   ngOnInit() {}
 
-  showMe(student: NgForm) {
-    console.log("email = " + student.value.email);
-  }
+  // this logic will not be executed. it was used to help another team member.
+  authenticate(student: NgForm) {
+    this.dataService.authenticateLogin("student", student.value, student.value.studentId, student.value.email )
+        .subscribe(
+          student => this.successMessage = "Valid Login",
+          error =>  this.errorMessage = <any>error);
+          
+    this.router.navigate([ '/recruiter', student.value.studentId ]); 
+  } 
 
   //everything below here is form validation boiler plate
   ngAfterViewChecked() {
