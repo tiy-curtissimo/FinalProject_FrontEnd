@@ -21,6 +21,10 @@ export class QuizComponent implements OnInit {
 
   questions: any[];
 
+  quizForm: NgForm;
+
+  answers = [];
+
   mode = 'Observable';
 
   constructor(
@@ -30,7 +34,6 @@ export class QuizComponent implements OnInit {
   ) {}
 
   ngOnInit() { 
-
     this.getQuestions();
 
     this.route.params
@@ -47,6 +50,10 @@ export class QuizComponent implements OnInit {
       .subscribe(
         questions => this.questions = questions,
         error =>  this.errorMessage = <any>error);
+  }
+  
+  saveQuiz(quizForm: NgForm) {
+    console.log(this.answers);
   }
 
 }

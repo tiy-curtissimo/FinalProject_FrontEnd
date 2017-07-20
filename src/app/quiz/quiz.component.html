@@ -1,69 +1,71 @@
 <section @fadeInAnimation>
-  <ol class="breadcrumb">
-    <li><a routerLink="/home">Home</a></li>
-    <li class="active">Student Quiz</li>
-</ol>
 
-<br/><br/><br/><br/>
-<h2>TAKE A QUIZ!!!</h2>
-<br/>
+    <ol class="breadcrumb">
+        <li><a routerLink="/home">Home</a></li>
+        <li class="active">Student Quiz</li>
+    </ol>
 
- <div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage" id="deletemsg">
-    {{errorMessage}} {{successMessage}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div> 
+    <br/><br/><br/><br/>
+    <h2>TAKE A QUIZ!!!</h2>
+    <br/>
 
-<!-- two-day data bind to studentId property in student.component.ts -->
- <input type="number" [(ngModel)]="studentId"/>
-<a class="btn btn-primary" [routerLink]="[ '/student']">Submit Answers</a> 
+    <div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage" id="deletemsg">
+        {{errorMessage}} {{successMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> 
 
+    <form novalidate (ngSubmit)="saveQuiz(quizForm)"  #quizForm="ngForm" class="form-horizontal">
 
-    <!-- {
-        "questionId": 1,
-        "question": "Suppose your method does not return any value, which of the following keywords can be used as a return type?",
-        "choiceA": "void",
-        "choiceB": "int",
-        "choiceC": "double",
-        "choiceD": "public",
-        "noneOfTheAbove": "None of the Above",
-        "answer": "void"
-    } -->
-
-
-
-<table class="table table-striped table-bordered" id="dataTable" style="width:100%">
-  <thead>
-    <tr>
-      <th>Question ID</th>
-      <th>Question</th>
-      <th>Choice A</th>
-      <th>Choice B</th>
-      <th>Choice C</th>
-      <th>Choice D</th>
-      <th>None of the Above</th>
-      <th>Answer</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let question of questions">
-      <td>{{question.questionId}}</td>
-      <td>{{question.question}}</td>
-      <td>{{question.choiceA}}</td>
-      <td>{{question.choiceB}}</td>
-      <td>{{question.choiceC}}</td>
-      <td>{{question.choiceD}}</td>
-      <td>{{question.noneOfTheAbove}}</td>
-      <td>{{question.answer}}</td>
-      <!-- <td class="text-center">
-        <a class="btn btn-primary" [routerLink]="['/student/edit/', student.student_id]">Edit</a>&nbsp;
-        <button (click)="deleteStudent(student.student_id)" class="btn btn-danger">Delete</button>
-      </td> -->
-    </tr>
-  </tbody>
-</table>
-
-
-
+        <div *ngFor="let question of questions">
+            <div class="row">
+                <div id="box" class="col-lg-10 col-md-11 col-sm-2 col-xs-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" id="ph">
+                            <h3 class="panel-title">{{question.questionId}}.&nbsp;&nbsp;{{question.question}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <select [ngModel]="question" ngModel #question="ngModel" name=question{{question.questionId}} id="question" required>
+                                 <!-- <option *ngFor="let question of answer" [value]="answer"></option>  -->
+                                 <option *ngFor="let choices of question" [value]="answer"></option> 
+                            </select> 
+                                <!-- 
+                                see https://stackoverflow.com/questions/43773676/how-to-do-ngfor-loop-on-nested-json-object
+                                 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Click Here to Submit Your Answers</button>
+        </div>
+        <br/><br/><br/>
+    </form>
 </section>
+
+
+                            <!-- <div class="radio">
+
+                                <label>
+                                    <input type="radio" name={{question.questionId}} id="choiceA">{{question.choiceA}} 
+                                </label><br/>
+
+                                <label>
+                                    <input type="radio" name={{question.questionId}} id="choiceB">{{question.choiceB}} 
+                                </label><br/>
+
+                                <label>
+                                    <input type="radio" name={{question.questionId}} id="choiceC">{{question.choiceC}} 
+                                </label><br/>
+
+                                <label>
+                                    <input type="radio" name={{question.questionId}} id="choiceD">{{question.choiceD}} 
+                                </label><br/>
+
+                                <label>
+                                    <input type="radio" name={{question.questionId}} id="noneOfTheAbove">{{question.noneOfTheAbove}} 
+                                </label><br/>
+
+                            </div> -->
