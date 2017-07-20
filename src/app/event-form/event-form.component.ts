@@ -22,7 +22,7 @@ export class EventFormComponent implements OnInit {
   errorMessage: string;
 
   event: object = {};
-  recruiter: any[];
+  recruiter: any;
 
   eventForm: NgForm;
   @ViewChild('eventForm') currentForm: NgForm;
@@ -48,7 +48,7 @@ export class EventFormComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getRecruiters();
+   this.recruiter = {}
     this.route.params
       .subscribe((params: Params) => {
         (+params['id']) ? this.getRecordForEdit() : null;
@@ -110,15 +110,15 @@ export class EventFormComponent implements OnInit {
   }
 
   formErrors = {
-    'event_date': '',
-    'event_name': '',
+    'eventDate': '',
+    'eventName': '',
   };
 
   validationMessages = {
-    'event_date': {
+    'eventDate': {
     'pattern': 'Start date should be in the following format: YYYY-MM-DD'
   },
-   'event_name': {
+   'eventName': {
       'required': 'First name is required.',
       'minlength': 'First name must be at least 2 characters long.',
       'maxlength': 'First name cannot be more than 30 characters long.'
