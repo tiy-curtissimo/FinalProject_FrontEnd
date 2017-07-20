@@ -19,23 +19,6 @@ import { RecruiterComponent } from './recruiter/recruiter.component';
 import { RegisterComponent } from './register/register.component';
 
 
-// import { GradeComponent } from './grade/grade.component';
-// import { GradeFormComponent } from './grade-form/grade-form.component';
-// import { ClassFormComponent } from './class-form/class-form.component';
-// import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
-// import { MajorFormComponent } from './major-form/major-form.component';
-// import { MajorClassFormComponent } from './major-class-form/major-class-form.component';
-// import { StudentClassFormComponent } from './student-class-form/student-class-form.component';
-// import { StudentClassComponent } from './student-class/student-class.component';
-// import { MajorClassComponent } from './major-class/major-class.component';
-// import { MajorComponent } from './major/major.component';
-// import { AssignmentComponent } from './assignment/assignment.component';
-// import { ClassComponent } from './class/class.component';
-
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,18 +31,6 @@ import { RegisterComponent } from './register/register.component';
     RecruiterComponent,
     RegisterComponent
 
-    // GradeComponent,
-    // GradeFormComponent,
-    // ClassFormComponent,
-    // AssignmentFormComponent,
-    // MajorFormComponent,
-    // MajorClassFormComponent,
-    // StudentClassFormComponent,
-    // StudentClassComponent,
-    // MajorClassComponent,
-    // MajorComponent,
-    // AssignmentComponent,
-    // ClassComponent,
 
   ],
   imports: [

@@ -13,28 +13,64 @@
     </button>
 </div> 
 
+<!--<form class="form-inline" novalidate (ngSubmit)="recruiterLogin(recruiterForm)"  #recruiterForm="ngForm" >
+    <input [ngModel]="recruiter?.enterprise_id" ngModel #enterprise_id="ngModel" type="hidden" name="enterprise_id">
+         <span *ngIf="formErrors.enterprise_id" class="text-danger">
+          {{ formErrors.enterprise_id }}
+        </span>-->
+
 <br><br><br><br>
 
 <h1>Recruiter Login</h1>
 
 <br><br>
 
-    <div class="form-group">
+    <!--<div class="form-group">
     <label for="enterprise_id" class="col-sm-24 control-label">N Number</label>
     <input type="text" [(ngModel)]="enterprise_id"/>
     </div>
     <div class="form-group">
     <label for="enterprise_id" class="col-sm-22 control-label">Password</label>
-    <input type="text" [(ngModel)]="password"/>
+    <input type="text" [(ngModel)]="password"/>-->
+
+    <form novalidate (ngSubmit)="recruiterLogin(recruiterForm)"  #recruiterForm="ngForm" class="form-horizontal">
+
+    <div class="form-group">
+      <label for="enterprise_id" class="col-sm-2 control-label">N Number</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="enterprise_id" type="text" class="form-control" id="enterprise_id" name="enterprise_id" placeholder="Enter N Number..." required>
+          <span *ngIf="formErrors.enterprise_id" class="text-danger">
+            {{ formErrors.enterprise_id }}
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="password" type="text" class="form-control" id="password" name="password" placeholder="Enter Password..." required>
+          <span *ngIf="formErrors.password" class="text-danger">
+            {{ formErrors.password }}
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button [disabled]="!recruiterForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+
 
     <br><br>
 
-    <a class="btn btn-primary" [routerLink]="[ '/recruiter/username/', enterprise_id ]">Login</a>
+    <!--<a class="btn btn-primary" [routerLink]="[ '/recruiter/username/', enterprise_id ]">Login</a>-->
 
     <br><br><br><br><br><br><br><br>
 
     <a class="btn btn-default" [routerLink]="[ '/register/add/']">Register New Recruiter</a>
-    </div>
+    
 
 
 </section>

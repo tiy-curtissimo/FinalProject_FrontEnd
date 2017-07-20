@@ -43,9 +43,16 @@ export class RecruiterFormComponent implements OnInit {
   }
 
   getRecordForEdit(){
-    console.log("hola")
     this.route.params
-      .switchMap((params: Params) => this.dataService.getRecruiterRecordByEnterprise("recruiter", params['enterprise_id']))
+      .switchMap((params: Params) => this.dataService.getRecruiterRecord("recruiter", params['enterprise_id']))
+      .subscribe(
+        recruiter => this.recruiter = recruiter,
+        error =>  this.errorMessage = <any>error);
+  }
+
+  recruiterLogin(){
+    this.route.params
+      .switchMap((params: Params) => this.dataService.recruiterLogin("recruiter", params['enterprise_id'],['password']))
       .subscribe(
         recruiter => this.recruiter = recruiter,
         error =>  this.errorMessage = <any>error);
@@ -55,7 +62,7 @@ export class RecruiterFormComponent implements OnInit {
   //if we had a id on the form and it is a number then edit otherwise create
   saveRecruiter(recruiter: NgForm){
     if(typeof recruiter.value.id === "number"){
-      this.dataService.editRecruiterRecord("recruiter", recruiter.value, recruiter.value.recruiter_id)
+      this.dataService.editRecruiterRecord("recruiter", recruiter.value, recruiter.value.recruiterId)
           .subscribe(
             recruiter => this.successMessage = "Record updated successfully",
             error =>  this.errorMessage = <any>error);
@@ -99,7 +106,7 @@ export class RecruiterFormComponent implements OnInit {
     },
     'email': {
       'required': 'Email is required.',
-      'minlength': 'Email must include @ symbol'
+      'pattern': 'Email must include @ symbol'
     }
   };
 
