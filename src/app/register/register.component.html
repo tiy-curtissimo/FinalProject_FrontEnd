@@ -20,29 +20,68 @@
 
 <br><br>
 
-    <div class="form-group">
-    <label for="enterprise_id" class="col-sm-22 control-label">N Number </label>
-    <input type="text" [(ngModel)]="enterprise_id"/>
+    <form novalidate (ngSubmit)="saveRecruiter(registerForm)" #registerForm="ngForm" class="form-horizontal">
+    <input [ngModel]="recruiter?.recruiterId" ngModel #recruiterId="ngModel" type="hidden" name="recruiterId">    
+        <div class="form-group">
+      <label for="username" class="col-sm-2 control-label">User Name</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="username" type="text" class="form-control" id="username" name="username" placeholder="Enter User Name..." required>
+          <span *ngIf="formErrors.username" class="text-danger">
+            {{ formErrors.username }}
+        </span>
+      </div>
     </div>
-    <div class="form-group">
-    <label for="password" class="col-sm-22 control-label">Password </label>
-    <input type="text" [(ngModel)]="password"/>
+
+        <div class="form-group">
+      <label for="password" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="password" type="text" class="form-control" id="password" name="password" placeholder="Enter Password..." required>
+          <span *ngIf="formErrors.password" class="text-danger">
+            {{ formErrors.password }}
+        </span>
+      </div>
     </div>
-    <div class="form-group">
-    <label for="email" class="col-sm-22 control-label">Email </label>
-    <input type="text" [(ngModel)]="email"/>
+
+        <div class="form-group">
+      <label for="email" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="email" type="text" class="form-control" id="email" name="email" placeholder="Enter Email..." required>
+          <span *ngIf="formErrors.email" class="text-danger">
+            {{ formErrors.email }}
+        </span>
+      </div>
     </div>
-    <div class="form-group">
-    <label for="first_name" class="col-sm-22 control-label">First Name</label>
-    <input type="text" [(ngModel)]="first_name"/>
+    
+        <div class="form-group">
+      <label for="firstName" class="col-sm-2 control-label">First Name</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="firstName" type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name..." required>
+          <span *ngIf="formErrors.firstName" class="text-danger">
+            {{ formErrors.firstName }}
+        </span>
+      </div>
     </div>
-    <div class="form-group">
-    <label for="last_name" class="col-sm-22 control-label">Last Name</label>
-    <input type="text" [(ngModel)]="last_name"/>
+    
+        <div class="form-group">
+      <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="lastName" type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name..." required>
+          <span *ngIf="formErrors.lastName" class="text-danger">
+            {{ formErrors.lastName }}
+        </span>
+      </div>
     </div>
+
+        <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button [disabled]="!registerForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+  
+    </form>
 
     <br><br>
 
-    <a class="btn btn-primary" routerLink="/recruiter" >Register</a>
+   
     
 </section>

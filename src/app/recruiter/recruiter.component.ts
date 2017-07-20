@@ -21,7 +21,7 @@ export class RecruiterComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
 
-  enterprise_id: string;
+  username: string;
   password: string;
 
   recruiter: object; 
@@ -34,9 +34,21 @@ export class RecruiterComponent implements OnInit {
 
   ngOnInit() {}
 
-  recruiterLogin(recruiter: NgForm) {
-    console.log("id = " + recruiter.value.enterprise_id);
+  // authenticateLogin(recruiter: NgForm) {
+  //   console.log("id = " + recruiter.value.username);
+  //   console.log("password = " + recruiter.value.password);
+  // }
+
+   authenticate(recruiter: NgForm) {
+    console.log("id = " + recruiter.value.username);
     console.log("password = " + recruiter.value.password);
+      this.dataService.authenticateLogin("recruiter", recruiter.value)
+          .subscribe(
+            recruiter => console.log(recruiter),
+            error =>  this.errorMessage = <any>error);
+            this.recruiter = {};
+            console.log(this.recruiter)
+
   }
   //everything below here is form validation boiler plate
   ngAfterViewChecked() {
@@ -64,14 +76,15 @@ export class RecruiterComponent implements OnInit {
     }
   }
   formErrors = {
-    'enterprise_id': '',
+    'username': '',
+    'password': '',
   };
   validationMessages = {
-    'enterprise_id': {
-      'required': 'N Number is required'
+    'username': {
+      'required': 'User Name is required'
     },
     'password': {
       'required': 'Password is required'
-    },
+    }
   };
 }

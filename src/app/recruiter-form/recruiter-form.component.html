@@ -2,13 +2,13 @@
   <ol class="breadcrumb">
     <li><a routerLink="/home">Home</a></li>
     <li><a routerLink="/recruiter">Recruiter</a></li>
-    <li class="active">Review Prospects</li>
+    <li class="active">Review Recruiters</li>
     <li><a class="btn btn-primary" routerLink="/recruiter">Return to Recruiter Login</a></li>
 </ol>
 
 <br><br><br><br><br>
 
-<h1>Prospect Review</h1>
+<h1>Manage Recruiters</h1>
 
 <div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage" id="deletemsg">
     {{errorMessage}} {{successMessage}}
@@ -20,37 +20,53 @@
 
 <br>
 
-<table class="table table-striped table-bordered" id="dataTable" style="width:100%">
-  <thead>
-    <tr>
-      <th>Event Name</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>University</th>
-      <th>Major</th>
-      <th>GPA</th>
-      <th>Phone Number</th>
-      <th>Graduation Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let student of students">
-      <td>{{student.student_id}}</td>
-      <td>{{student.event_name}}</td>
-      <td>{{student.first_name}}</td>
-      <td>{{student.last_name}}</td>
-      <td>{{student.email}}</td>
-      <td>{{student.university}}</td>
-      <td>{{student.major?.major}}</td>
-      <td>{{student.gpa}}</td>
-      <td>{{student.phone_number}}</td>
-      <td>{{student.graduation_date}}</td>
-      <td class="text-center">
-        <a class="btn btn-primary" [routerLink]="['/student/edit/', student.student_id]">Edit</a>&nbsp;
-        <button (click)="deleteStudent(student.student_id)" class="btn btn-danger">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<form novalidate (ngSubmit)="saveRecruiter(recruiterForm)"  #recruiterForm="ngForm" class="form-horizontal">
+  <input [ngModel]="recruiter?.recruiterId" ngModel #recruiterId="ngModel" type="hidden" name="recruiterId">
+
+  <div class="form-group">
+    <label for="username" class="col-sm-2 control-label">User Name</label>
+    <div class="col-sm-10">
+      <input [ngModel]="recruiter?.username" ngModel #username="ngModel" type="text" class="form-control" id="username" name="username" placeholder="User Name" required>
+    <span *ngIf="formErrors.username" class="text-danger">
+          {{ formErrors.username }}
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="first_name" class="col-sm-2 control-label">First Name</label>
+    <div class="col-sm-10">
+      <input [ngModel]="recruiter?.firstName" ngModel #firstName="ngModel" type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required>
+      <span *ngIf="formErrors.firstName" class="text-danger">
+          {{ formErrors.firstName }}
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+    <div class="col-sm-10">
+      <input [ngModel]="recruiter?.lastName" ngModel #lastName="ngModel" type="text" class="form-control" id="lastName" name="lastName"  placeholder="Last Name" required>
+      <span *ngIf="formErrors.lastName" class="text-danger">
+          {{ formErrors.lastName }}
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-10">
+      <input [ngModel]="recruiter?.email" ngModel #email="ngModel" type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+      <span *ngIf="formErrors.email" class="text-danger">
+          {{ formErrors.email }}
+      </span>
+    </div>
+  </div>
+
+   <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button [disabled]="!studentForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
 </section>
