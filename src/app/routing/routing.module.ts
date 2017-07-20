@@ -10,6 +10,9 @@ import { RecruiterComponent }   from '../recruiter/recruiter.component';
 import { RecruiterFormComponent }   from '../recruiter-form/recruiter-form.component';
 import { RegisterComponent }   from '../register/register.component';
 
+import { EventComponent }   from '../event/event.component';
+import { EventFormComponent }   from '../event-form/event-form.component';
+
  
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,10 +23,13 @@ const routes: Routes = [
   { path: 'student/add', component: StudentFormComponent },
 
  { path: 'recruiter',  component: RecruiterComponent },
-  { path: 'recruiter/username/:enterprise_id', component: RecruiterFormComponent },
+  // { path: 'recruiter/username/:enterprise_id', component: RecruiterFormComponent },
   { path: 'recruiter/add', component: RecruiterFormComponent },
   { path: 'register/add',  component: RegisterComponent },
 
+  { path: 'event',  component: EventComponent },
+  { path: 'recruiter/username/:enterprise_id', component: EventComponent },
+  { path: 'event/add', component: EventFormComponent },
 ];
  
 @NgModule({

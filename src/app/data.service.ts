@@ -59,6 +59,13 @@ export class DataService {
     }
 
     // RECRUITER GET, PUT, & POST
+     getRecruiters(endpoint: string): Observable<any[]> {
+        let apiUrl = `${this.baseUrl}${endpoint}/all`;
+        console.log(apiUrl);
+        return this.http.get(apiUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     getRecruiterRecord(endpoint: string, enterprise_id:string): Observable<object> {
         let apiUrl = `${this.baseUrl}${endpoint}/${enterprise_id}`;
         return this.http.get(apiUrl)
@@ -93,8 +100,38 @@ export class DataService {
             .catch(this.handleError);
     }
 
+    //Events get all, by id, Add, update and delete
+      getEvents(endpoint: string): Observable<any[]> {
+        let apiUrl = `${this.baseUrl}${endpoint}/all`;
+        console.log(apiUrl);
+        return this.http.get(apiUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
 
+     getEventbyID(endpoint: string, id): Observable<object> {
+        let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
+        return this.http.get(apiUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
 
+     addEventRecord(endpoint: string, record:object): Observable<object> {
+        let apiUrl = `${this.baseUrl}${endpoint}/add`;
+        console.log(apiUrl)
+        return this.http.post(apiUrl, record)
+        .map(this.extractData)
+        .catch(this.handleError);
+    }
+
+     editEventRecord(endpoint: string, record:object, id:number): Observable<object> {
+        let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
+        console.log(record)
+        console.log(apiUrl)
+        return this.http.put(apiUrl, record)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
 
     getRecords(endpoint: string): Observable<any[]> {
         let apiUrl = this.baseUrl+endpoint + "/all";
