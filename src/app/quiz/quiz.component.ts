@@ -60,9 +60,9 @@ export class QuizComponent implements OnInit {
   //     "finalScore":3
   // }
   saveQuiz(quizForm: NgForm) {
-    console.log(quizForm);
-
     console.log("quizId: " + quizForm.value.quizId);
+
+    console.log(quizForm)
   }
 
 }
