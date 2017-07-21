@@ -101,9 +101,9 @@ export class DataService {
     }
 
     //Events get all, by id, Add, update and delete
-      getEvents(endpoint: string): Observable<any[]> {
-        let apiUrl = `${this.baseUrl}${endpoint}/all`;
-        console.log(apiUrl);
+
+    getRecord(endpoint: string, id): Observable<object> {
+        let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
         return this.http.get(apiUrl)
             .map(this.extractData)
             .catch(this.handleError);
@@ -124,14 +124,14 @@ export class DataService {
         .catch(this.handleError);
     }
 
-     editEventRecord(endpoint: string, record:object, id:number): Observable<object> {
-        let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
-        console.log(record)
-        console.log(apiUrl)
-        return this.http.put(apiUrl, record)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
+    //  editEventRecord(endpoint: string, record:object, id:number): Observable<object> {
+    //     let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
+    //     console.log(record)
+    //     console.log(apiUrl)
+    //     return this.http.put(apiUrl, record)
+    //         .map(this.extractData)
+    //         .catch(this.handleError);
+    // }
 
     getRecords(endpoint: string): Observable<any[]> {
         let apiUrl = this.baseUrl+endpoint + "/all";
@@ -153,18 +153,36 @@ export class DataService {
             .catch(this.handleError);
     }
 
+      editRecord(endpoint: string, record:object, id:number): Observable<object> {
+        let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
+        console.log(record)
+        console.log(apiUrl)
+        return this.http.put(apiUrl, record)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
 
 
     private extractData(res: Response) {
-        let results = res.json();
+        let results = false;try{
+            results = res.json();
+        }catch(e){
+            if(res.status !== 200){
+                return Observable.throw(e);
+            }
+        }
         return results || [];
     }
+        
 
     private handleError(error: Response | any) {
         // In a real world app, you might use a remote logging infrastructure
         // console.log("Error: " + error);
         // return Observable.throw(error.message);
         let errMsg: string;
+        console.log("error");
+        
         if(typeof error._body === "string"){
             errMsg = error._body
         }else{

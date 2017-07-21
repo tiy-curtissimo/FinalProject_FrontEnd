@@ -15,14 +15,13 @@
 
 <br><br><br>
 
-<table class="table table-striped table-bordered" id="dataTable" style="width:100%">
+ <table class="table table-striped table-bordered" id="dataTable" style="width:100%">
   <thead>
     <tr>
       <th>Event ID</th>
       <th>Event Date</th>
       <th>Event Name</th>
-      <th>Recruiter FirstName</th>
-      <th>Recruiter LastName</th>
+      <th>Recruiter</th>
       <th>Admin</th>
     </tr>
   </thead>
@@ -31,13 +30,18 @@
       <td>{{event.eventId}}</td>
       <td>{{event.eventDate}}</td>
       <td>{{event.eventName}}</td>
-      <td>{{event.first_name}}</td>
-      <td>{{event.last_name}}</td>
+      <td><span *ngFor="let recruiter of event.recruiters">
+        {{recruiter.firstName}} {{recruiter.lastName}} <br />
+      </span> 
+        </td>
       <td class="text-center">
-        <a class="btn btn-primary" [routerLink]="['/event/edit/', event.event_id]">Edit Event</a>&nbsp;
-      <button (click)="deleteEvent(event.event_id)" class="btn btn-danger">Delete Event</button>
+        <a class="btn btn-primary" [routerLink]="['/event/edit/', event.eventId]">Edit Event</a>&nbsp;
+      <button (click)="deleteEvent(event.eventId)" class="btn btn-danger">Delete Event</button>
       </td>
     </tr>
   </tbody>
-</table>
+</table> 
+
+
 </section>
+

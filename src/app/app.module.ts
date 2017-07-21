@@ -11,8 +11,10 @@ import { AppRoutingModule } from './routing/routing.module';
 import { HomeComponent } from './home/home.component';
 import { DataService } from './data.service';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
-import { DataTableModule, SharedModule, MultiSelectModule } from 'primeng/primeng';
+import { TreeTableModule, DataTableModule, SharedModule, MultiSelectModule } from 'primeng/primeng';
 import { StatusMessageComponent } from './status-message/status-message.component';
+import {CommonModule} from '@angular/common';
+
 
 import { StudentComponent } from './student/student.component';
 import { StudentFormComponent } from './student-form/student-form.component';
@@ -21,10 +23,7 @@ import { RecruiterFormComponent } from './recruiter-form/recruiter-form.componen
 import { RegisterComponent } from './register/register.component';
 import { EventComponent } from './event/event.component';
 import { EventFormComponent } from './event-form/event-form.component';
-
-
-
-
+//import { EventRecruiterComponent } from './event-recruiter/event-recruiter.component';
 
 
 
@@ -41,7 +40,8 @@ import { EventFormComponent } from './event-form/event-form.component';
     RecruiterFormComponent,
     RegisterComponent,
     EventComponent,
-    EventFormComponent
+    EventFormComponent,
+    // EventRecruiterComponent
 
   ],
   imports: [
@@ -53,7 +53,8 @@ import { EventFormComponent } from './event-form/event-form.component';
     FormsModule,
     DataTableModule,
     SharedModule,
-    MultiSelectModule
+    MultiSelectModule,
+    TreeTableModule,
   ],
   entryComponents: [DeleteConfirmComponent],
   providers: [DataService],

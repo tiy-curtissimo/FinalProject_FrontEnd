@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'event',  component: EventComponent },
   { path: 'recruiter/username/:enterprise_id', component: EventComponent },
   { path: 'event/add', component: EventFormComponent },
+  { path: 'event/edit/:eventId', component: EventFormComponent },
 ];
  
 @NgModule({

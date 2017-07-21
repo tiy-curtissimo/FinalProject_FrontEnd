@@ -1,83 +1,95 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, ViewChild }      from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
-
 import { DataService } from '../data.service'
-// import { slideInOutAnimation } from '../animations/slide-in.animation';
+
 
 @Component({
   selector: 'app-event-form',
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.css'],
-  // animations: [slideInOutAnimation],
- 
-  //   attach the slide in/out animation to the host (root) element of this component
-  //   host: { '[@slideInOutAnimation]': '' }
 })
+
 export class EventFormComponent implements OnInit {
 
   successMessage: string;
   errorMessage: string;
 
   event: object = {};
-  recruiter: any;
+  events: any[];
+  currentRecruiters: any[];
 
   eventForm: NgForm;
   @ViewChild('eventForm') currentForm: NgForm;
 
-    getRecordForEdit(){
+  getRecordForEdit(){
+    console.log("I am here");
     this.route.params
-      .switchMap((params: Params) => this.dataService.getEventbyID("event", +params['id']))
+      .switchMap((params: Params) => this.dataService.getRecord("event/recruiters", +params['eventId']))
       .subscribe(event => this.event = event);
   }
 
     getRecruiters() {
+      console.log("present");
     this.dataService.getRecords("recruiter")
       .subscribe(
-        recruiters => this.recruiter = recruiters,
+        recruiters => {
+          this.currentRecruiters = recruiters
+          console.log(this.currentRecruiters)
+        },
+        error =>  this.errorMessage = <any>error);
+  }
+  getEventRecruiters(){
+    this.dataService.getRecords("event/recruiters")
+      .subscribe(
+       events => this.events = events,
         error =>  this.errorMessage = <any>error);
   }
 
     constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private router: Router    
   ) {}
 
 
   ngOnInit() {
-   this.recruiter = {}
+
+    this.getRecruiters();
+    console.log("test");
     this.route.params
       .subscribe((params: Params) => {
-        (+params['id']) ? this.getRecordForEdit() : null;
+        (+params['eventId']) ? this.getRecordForEdit() : null;
       });
   }
   
 
-  saveEvent(id){
-    if(typeof id === "number"){
-      this.dataService.editEventRecord("event", this.event, id)
-          .subscribe(
-            event => this.successMessage = "Record updated succesfully",
+  saveEvent(eventId){
+    if(typeof eventId === "number"){
+      this.dataService.editRecord("event", this.eventForm.value, eventId)
+            .subscribe(
+            event => { this.successMessage = "Record(s) updated succesfully"; this.getEventRecruiters(); },
             error =>  this.errorMessage = <any>error);
+
     }else{
-      this.dataService.addEventRecord("event", this.event)
+      console.log(this.eventForm.value)
+      this.dataService.addEventRecord("event", this.eventForm.value)
           .subscribe(
-            event => this.successMessage = "Record added succesfully",
+           event => { this.successMessage = "Record(s) updated succesfully"; this.getEventRecruiters(); },
             error =>  this.errorMessage = <any>error);
     }
-
     this.event = {};
     this.eventForm.reset();
-    
+    this.router.navigate( ['/event'] );
   }
 
   byRecruiterId(item1, item2){
     if (item1 != undefined && item2 != undefined) {
-      return item1.recruiter_id === item2.recruiter_id;
-    }
+      return item1.recruiterId === item2.recruiterId;
+    } 
   }
 
    ngAfterViewChecked() {
