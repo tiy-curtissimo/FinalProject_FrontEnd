@@ -2,13 +2,13 @@
   <ol class="breadcrumb">
     <li><a routerLink="/home">Home</a></li>
     <li><a routerLink="/recruiter">Recruiter</a></li>
-    <li class="active">Review Recruiters</li>
+    <li class="active">Review Recruiter</li>
     <li><a class="btn btn-primary" routerLink="/recruiter">Return to Recruiter Login</a></li>
 </ol>
 
 <br><br><br><br><br>
 
-<h1>Manage Recruiters</h1>
+<h1>Manage Recruiter Information</h1>
 
 <div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage" id="deletemsg">
     {{errorMessage}} {{successMessage}}
@@ -20,7 +20,7 @@
 
 <br>
 
-<form novalidate (ngSubmit)="saveRecruiter(recruiterForm)"  #recruiterForm="ngForm" class="form-horizontal">
+<form novalidate (ngSubmit)="editRecruiter(recruiterForm)"  #recruiterForm="ngForm" class="form-horizontal">
   <input [ngModel]="recruiter?.recruiterId" ngModel #recruiterId="ngModel" type="hidden" name="recruiterId">
 
   <div class="form-group">
@@ -56,7 +56,7 @@
   <div class="form-group">
     <label for="email" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-10">
-      <input [ngModel]="recruiter?.email" ngModel #email="ngModel" type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+      <input [ngModel]="recruiter?.email" ngModel #email="ngModel" type="text" class="form-control" id="email" name="email" placeholder="Email" required minlength="2" maxlength="50" required>
       <span *ngIf="formErrors.email" class="text-danger">
           {{ formErrors.email }}
       </span>
@@ -65,7 +65,7 @@
 
    <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button [disabled]="!studentForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+      <button [disabled]="!recruiterForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
     </div>
   </div>
 </form>

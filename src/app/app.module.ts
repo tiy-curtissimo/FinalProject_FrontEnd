@@ -17,6 +17,8 @@ import { StudentFormComponent } from './student-form/student-form.component';
 import { RecruiterFormComponent } from './recruiter-form/recruiter-form.component';
 import { RecruiterComponent } from './recruiter/recruiter.component';
 import { RegisterComponent } from './register/register.component';
+import { ProspectComponent } from './prospect/prospect.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { RegisterComponent } from './register/register.component';
     StudentFormComponent,
     RecruiterFormComponent,
     RecruiterComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProspectComponent,
+    QuizComponent
 
 
   ],

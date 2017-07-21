@@ -1,12 +1,23 @@
-// import 'rxjs/add/operator/switchMap';
-import { Component } from '@angular/core';
-// import { MdDialog, MdDialogRef } from '@angular/material';
-import { NgForm } from '@angular/forms';
-// import { ActivatedRoute, Params } from '@angular/router';
-// import { DataService } from '../data.service'
-// import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component'
-import { fadeInAnimation } from '../animations/fade-in.animation';
+// import { Component } from '@angular/core';
+// import { NgForm } from '@angular/forms';
+// import { fadeInAnimation } from '../animations/fade-in.animation';
+// @Component({
+//   selector: 'app-student',
+//   templateUrl: './student.component.html',
+//   styleUrls: ['./student.component.css'],
+//   animations: [fadeInAnimation]
+// })
+// export class StudentComponent {
+//   email: string;
+// }
 
+import 'rxjs/add/operator/switchMap';
+import { Component, OnInit, ViewChild }      from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Location }               from '@angular/common';
+import { NgForm } from '@angular/forms';
+import { DataService } from '../data.service'
+import { fadeInAnimation } from '../animations/fade-in.animation';
 
 @Component({
   selector: 'app-student',
@@ -14,57 +25,78 @@ import { fadeInAnimation } from '../animations/fade-in.animation';
   styleUrls: ['./student.component.css'],
   animations: [fadeInAnimation]
 })
+export class StudentComponent implements OnInit {
 
-export class StudentComponent {
+  //this is needed for form on the page so we can do things like validation
+  //we can discuss this in detail when needed
+  studentForm: NgForm;
+  @ViewChild('studentForm')
+  currentForm: NgForm;
 
-
-  // loginForm: NgForm;
-  // @ViewChild('loginForm') currentForm: NgForm;
-
-  // errorMessage: string='';
-  // successMessage: string='';
-
-  // student: object;
+  //handle status messages
+  successMessage: string;
+  errorMessage: string;
 
   email: string;
+  student: object; 
 
-  // getRecordForEdit(){
-  //   this.route.params
-  //     .switchMap((params: Params) => this.dataService.getStudentRecordByEmail("student", +params['email']))
-  //     .subscribe(student => this.student = student);
-  // }
+  constructor(
+    private dataService: DataService,
+    private route: ActivatedRoute,
+    private location: Location,
+    private router: Router
+  ) {}
 
+  ngOnInit() {}
 
-  // constructor (private dataService: DataService, public dialog: MdDialog) {}
- 
-  // ngOnInit() { this.getStudents(); }
-  // ngOnInit() {  }
- 
-  // getStudent() {
-  //   this.route.params
-  //     .subscribe((params: Params) => {
-  //       (+params['email']) ? this.getRecordForEdit() : null;
-  //     });
-  // }
+  // this logic will not be executed. it was used to help another team member.
+  authenticate(student: NgForm) {
+    this.dataService.authenticateLogin("student", student.value, student.value.studentId, student.value.email )
+        .subscribe(
+          student => this.successMessage = "Valid Login",
+          error =>  this.errorMessage = <any>error);
+          
+    this.router.navigate([ '/recruiter', student.value.studentId ]); 
+  } 
 
+  //everything below here is form validation boiler plate
+  ngAfterViewChecked() {
+    this.formChanged();
+  }
 
-  // getStudents() {
-  //   this.dataService.getRecords("student")
-  //     .subscribe(
-  //       students => this.students = students,
-  //       error =>  this.errorMessage = <any>error);
-  // }
+  formChanged() {
+    this.studentForm = this.currentForm;
+    this.studentForm.valueChanges
+      .subscribe(
+        data => this.onValueChanged()
+      );
+  }
 
-  // deleteStudent(id:number) {
-  //   let dialogRef = this.dialog.open(DeleteConfirmComponent);
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if(result){
-  //       this.dataService.deleteRecord("student", id)
-  //         .subscribe(
-  //           student => {this.successMessage = "Record(s) deleted succesfully"; this.getStudents(); },
-  //           error =>  this.errorMessage = <any>error);
-  //     }
-  //   });
-  // }
+  onValueChanged() {
+    let form = this.studentForm.form;
 
+    for (let field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'email': '',
+  };
+
+  validationMessages = {
+    'email': {
+      'required': 'Email is required',
+      'pattern': 'Invalid Email Format'
+    },
+  };
 }

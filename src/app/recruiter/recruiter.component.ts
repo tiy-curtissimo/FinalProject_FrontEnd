@@ -11,6 +11,7 @@ import { fadeInAnimation } from '../animations/fade-in.animation';
   styleUrls: ['./recruiter.component.css'],
   animations: [fadeInAnimation]
 })
+
 export class RecruiterComponent implements OnInit {
   //this is needed for form on the page so we can do things like validation
   //we can discuss this in detail when needed
@@ -42,7 +43,7 @@ export class RecruiterComponent implements OnInit {
    authenticate(recruiter: NgForm) {
     console.log("id = " + recruiter.value.username);
     console.log("password = " + recruiter.value.password);
-      this.dataService.authenticateLogin("recruiter", recruiter.value)
+      this.dataService.recruiterLogin("recruiter", recruiter.value)
           .subscribe(
             recruiter => console.log(recruiter),
             error =>  this.errorMessage = <any>error);

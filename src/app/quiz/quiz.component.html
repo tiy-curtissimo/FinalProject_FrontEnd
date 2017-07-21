@@ -1,0 +1,91 @@
+<section @fadeInAnimation>
+
+    <ol class="breadcrumb">
+        <li><a routerLink="/home">Home</a></li>
+        <li class="active">Student Quiz</li>
+    </ol>
+
+    <br/><br/><br/><br/>
+    <h2>TAKE A QUIZ!!!</h2>
+    <br/>
+
+    <div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage" id="deletemsg">
+        {{errorMessage}} {{successMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> 
+
+    <form novalidate (ngSubmit)="saveQuiz(quizForm)"  #quizForm="ngForm" class="form-horizontal">
+
+        <input [ngModel]="quiz.quizId" ngModel #quizId="ngModel" type="hidden" name="quizId" [value]="quiz.quizId">
+
+        <!-- <label>This is Quiz #{{quiz.quizId}}</label>
+        <br/><br/><br/> -->
+
+        <div *ngFor="let question of quiz.questions">
+
+            <div class="row">
+                <div id="box" class="col-lg-10 col-md-11 col-sm-2 col-xs-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" id="ph">
+                            <h3 class="panel-title">{{question.question}}</h3>
+                        </div>
+
+                            <div class="radio">
+                                <label>
+                                    <input [ngModel]="question.choiceA" ngModel #choiceA="ngModel" type="radio" name={{question.questionId}} id="choiceA">{{question.choiceA}} 
+                                </label><br/>
+
+                                <label>
+                                    <input [ngModel]="question.choiceB" ngModel #choiceB="ngModel" type="radio" name={{question.questionId}} id="choiceB">{{question.choiceB}} 
+                                </label><br/>
+
+                                <label>
+                                    <input [ngModel]="question.choiceC" ngModel #choiceC="ngModel" type="radio" name={{question.questionId}} id="choiceC">{{question.choiceC}} 
+                                </label><br/>
+
+                                <label>
+                                    <input [ngModel]="question.choiceD" ngModel #choiceD="ngModel" type="radio" name={{question.questionId}} id="choiceD">{{question.choiceD}} 
+                                </label><br/>
+
+                                <label>
+                                    <input [ngModel]="question.noneOfTheAbove" ngModel #noneOfTheAbove="ngModel" type="radio" name={{question.questionId}} id="noneOfTheAbove">{{question.noneOfTheAbove}} 
+                                </label><br/>
+                            </div> 
+
+                        <!-- <div class="panel-body">
+                             <select [ngModel]="question" ngModel #question="ngModel" name=question{{question.questionId}} id="question" required>
+                                 <option *ngFor="let question of ????" [value]="answer"></option>  
+                            </select>
+                        </div> -->
+
+                    </div> <!-- end panel-primary -->
+                </div>  <!-- end box -->
+            </div> <!-- end row -->
+        </div> <!-- end outer loop -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Click Here to Submit Your Answers</button>
+        </div>
+        <br/><br/><br/>
+    </form>
+</section>
+
+
+                            <!-- <div class="radio">
+                                <label>
+                                    <input type="radio" name={{question.questionId}} id="choiceA">{{question.choiceA}} 
+                                </label><br/>
+                                <label>
+                                    <input type="radio" name={{question.questionId}} id="choiceB">{{question.choiceB}} 
+                                </label><br/>
+                                <label>
+                                    <input type="radio" name={{question.questionId}} id="choiceC">{{question.choiceC}} 
+                                </label><br/>
+                                <label>
+                                    <input type="radio" name={{question.questionId}} id="choiceD">{{question.choiceD}} 
+                                </label><br/>
+                                <label>
+                                    <input type="radio" name={{question.questionId}} id="noneOfTheAbove">{{question.noneOfTheAbove}} 
+                                </label><br/>
+                            </div> -->
