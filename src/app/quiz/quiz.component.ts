@@ -17,9 +17,9 @@ export class QuizComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
 
-  questions: any[];
+  questions: object = {};
 
-  quiz: any[];
+  quiz: object = {};
 
   quizForm: NgForm;
 
@@ -43,12 +43,26 @@ export class QuizComponent implements OnInit {
   getQuiz() {
       this.dataService.getRecords( "question", "buildQuiz", this.studentId )
       .subscribe(
-        quiz => this.quiz = quiz,
+        quiz => {
+          this.quiz = quiz;
+          this.questions = quiz.questions;
+        },
         error =>  this.errorMessage = <any>error);
   }
   
+  // http://localhost:8080//quizResults/add/{quizId}
+  // {
+  //     "answer1":"A",
+  //     "answer2":"B",
+  //     "answer3":"C",
+  //     "answer4":"A",
+  //     "answer5":"B",
+  //     "finalScore":3
+  // }
   saveQuiz(quizForm: NgForm) {
-    //console.log(this.quizForm);
+    console.log(quizForm);
+
+    console.log("quizId: " + quizForm.value.quizId);
   }
 
 }
