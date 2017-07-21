@@ -24,7 +24,6 @@ export class StudentFormComponent implements OnInit {
   //scenarios: failed to get/save/edit record
   successMessage: string;
   errorMessage: string;
-  student_id: string;
 
   //what we actually got from the service when finding by email
   student: object;
@@ -55,23 +54,26 @@ export class StudentFormComponent implements OnInit {
   //saves student to the databbase using the service to call the api
   //if we had a id on the form and it is a number then edit otherwise create
   saveStudent(student: NgForm){
+    //console.log("Student Id in student-form.componet.ts: " + student.value.studentId);
+
     if(typeof student.value.studentId === "number"){
-      console.log("Update by ID " + student.value.studentId)
+      console.log("saveStudent - Update by ID " + student.value.studentId)
       this.dataService.editStudentRecord("student", student.value, student.value.studentId)
           .subscribe(
             student => this.successMessage = "Record updated successfully",
             error =>  this.errorMessage = <any>error);
     }else{
-      console.log("Adding Student")
+      console.log("saveStudent - Adding New Student")
       this.dataService.addStudentRecord("student", student.value)
           .subscribe(
             student => this.successMessage = "Record added successfully",
             error =>  this.errorMessage = <any>error);
             this.student = {};
     }
-        console.log("re-routing with studentId = " + student.value.studentId);
-        this.router.navigate( ['/quiz', student.value.studentId] ); 
+        localStorage.setItem('studentId', student.value.studentId);
+        this.router.navigate( ['/quiz'] );
   }
+
 
   //everything below here is form validation boiler plate
   ngAfterViewChecked() {

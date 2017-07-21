@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, ViewChild }      from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../data.service'
@@ -14,46 +14,41 @@ import { fadeInAnimation } from '../animations/fade-in.animation';
 })
 export class QuizComponent implements OnInit {
 
-  studentId: string;
-
   errorMessage: string;
   successMessage: string;
 
   questions: any[];
 
+  quiz: any[];
+
   quizForm: NgForm;
 
-  answers = [];
-
   mode = 'Observable';
+
+  studentId: string;
 
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit() { 
-    this.getQuestions();
-
-    this.route.params
-      .subscribe((params: Params) => {
-        ( params['studentId'] ) ? this.studentId = params['studentId'] : null;
-    });
-    console.log("incoming studentId: " + this.studentId);
-    
+    this.studentId = localStorage.getItem('studentId') || null;
+    this.getQuiz();
   }
 
-  getQuestions() {
-    // http://localhost:8080/question/getQuestions
-    this.dataService.getRecords("question", "getQuestions")
+  // http://localhost:8080/question/buildQuiz/2
+  getQuiz() {
+      this.dataService.getRecords( "question", "buildQuiz", this.studentId )
       .subscribe(
-        questions => this.questions = questions,
+        quiz => this.quiz = quiz,
         error =>  this.errorMessage = <any>error);
   }
   
   saveQuiz(quizForm: NgForm) {
-    console.log(this.answers);
+    //console.log(this.quizForm);
   }
 
 }

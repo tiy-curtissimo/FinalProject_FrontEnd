@@ -62,14 +62,17 @@ export class DataService {
             .catch(this.handleError);
     }
 
+
     // performed from quiz.component.ts to obtain quiz questions
-    getRecords(endpoint: string, option: string): Observable<any[]> {
-        let apiUrl = this.baseUrl+endpoint+"/"+option
-        console.log(apiUrl);
+    // http://localhost:8080/question/buildQuiz/2
+    getRecords(endpoint: string, option: string, id:string): Observable<any[]> {
+        let apiUrl = this.baseUrl+endpoint+"/"+option+"/"+id
+        console.log("getRecords: " + apiUrl);
         return this.http.get(apiUrl)
             .map(this.extractData)
             .catch(this.handleError);
     }
+
 
 // **************************************************************************************
 //                               RECRUITER PATH                                         *
