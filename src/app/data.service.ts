@@ -83,9 +83,9 @@ export class DataService {
 
     recruiterLogin(endpoint: string, record:object):
     Observable<object> {
-        let apiUrl = `${this.baseUrl}${endpoint}/username`;
+        let apiUrl = `${this.baseUrl}${endpoint}`;  //need to determine endpoint from backend
         // console.log(apiUrl);
-        return this.http.get(apiUrl)
+        return this.http.post(apiUrl, record)
             .map(this.extractData)
             .catch(this.handleError);
     }

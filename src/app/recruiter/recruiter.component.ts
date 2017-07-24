@@ -43,12 +43,18 @@ export class RecruiterComponent implements OnInit {
    authenticate(recruiter: NgForm) {
     console.log("id = " + recruiter.value.username);
     console.log("password = " + recruiter.value.password);
-      this.dataService.recruiterLogin("recruiter", recruiter.value)
+      this.dataService.recruiterLogin("recruiter", recruiter.value) //session/new???
           .subscribe(
-            recruiter => console.log(recruiter),
-            error =>  this.errorMessage = <any>error);
-            this.recruiter = {};
+            recruiter => {
             console.log(this.recruiter)
+
+            localStorage.setItem('potato', JSON.stringify(this.recruiter))
+            // recruiter => console.log(recruiter),
+            
+            // this.recruiter = {};
+
+          },
+          error =>  this.errorMessage = <any>error);
 
   }
   //everything below here is form validation boiler plate
