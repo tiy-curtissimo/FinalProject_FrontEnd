@@ -5,7 +5,6 @@
         <li class="active">Student Quiz</li>
     </ol>
 
-    <br/><br/><br/><br/>
     <h2>TAKE A DAMN QUIZ AND GET OUT!</h2>
     <br/>
 
@@ -41,22 +40,27 @@
 
                              <div class="radio">
                                 <label>
+                                    &nbsp;&nbsp;
                                     <input [ngModel]="question.choiceA" ngModel #choiceA="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceA}}" [value]="">{{question.choiceA}} 
                                 </label><br/>
 
                                 <label>
+                                    &nbsp;&nbsp;
                                     <input [ngModel]="question.choiceB" ngModel #choiceB="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceB}}" [value]="">{{question.choiceB}} 
                                 </label><br/>
 
                                 <label>
+                                    &nbsp;&nbsp;
                                     <input [ngModel]="question.choiceC" ngModel #choiceC="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceC}}" [value]="">{{question.choiceC}} 
                                 </label><br/>
 
                                 <label>
+                                    &nbsp;&nbsp;
                                     <input [ngModel]="question.choiceD" ngModel #choiceD="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceD}}" [value]="">{{question.choiceD}} 
                                 </label><br/>
 
                                 <label>
+                                    &nbsp;&nbsp;
                                     <input [ngModel]="question.noneOfTheAbove" ngModel #noneOfTheAbove="ngModel" type="radio" name={{question.questionId}}  id="{{question.questionId}}" [value]="">{{question.noneOfTheAbove}} 
                                 </label><br/>
                             </div> 

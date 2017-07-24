@@ -1,4 +1,4 @@
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 
 body{
 background-image: repeating-linear-gradient(
@@ -6,10 +6,10 @@ background-image: repeating-linear-gradient(
 );
 }
 
-/* Customize container
 
-    TODO: Need to rework these for different sized views
-*/
+
+
+/* Customize container */
 
 @media (min-width: 600px) {
     .container {
@@ -18,9 +18,6 @@ background-image: repeating-linear-gradient(
         width: 100%;
     }
 }
-
-
-/* Customize container */
 
 @media (min-width: 800px) {
     .container-fluid {

@@ -60,9 +60,11 @@ export class DataService {
 
       // performed from quiz.component.ts to obtain quiz questions
     // http://localhost:8080/question/buildQuiz/2
+    // performed from quiz.component.ts to obtain quiz questions
+    // http://localhost:8080//quiz/student/{studentId}
     getQuizRecords(endpoint: string, option: string, id:string): Observable<any> {
         let apiUrl = this.baseUrl+endpoint+"/"+option+"/"+id
-        console.log("getRecords: " + apiUrl);
+        console.log("getQuizRecords: " + apiUrl);
         return this.http.get(apiUrl)
             .map(this.extractData)
             .catch(this.handleError);

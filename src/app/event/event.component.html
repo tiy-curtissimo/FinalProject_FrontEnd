@@ -29,7 +29,9 @@
     <tr *ngFor="let event of events">
       <td>{{event.eventId}}</td>
       <td>{{event.eventDate}}</td>
-      <td>{{event.eventName}}</td>
+      <td> <a [routerLink]="['/prospectlist']">
+        {{event.eventName}}
+        </a></td>
       <td><span *ngFor="let recruiter of event.recruiters">
         {{recruiter.firstName}} {{recruiter.lastName}} <br />
       </span> 

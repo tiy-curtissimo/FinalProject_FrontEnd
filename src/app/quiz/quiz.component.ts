@@ -39,9 +39,9 @@ export class QuizComponent implements OnInit {
     this.getQuiz();
   }
 
-  // http://localhost:8080/question/buildQuiz/2
+  // http://localhost:8080//quiz/student/{studentId}
   getQuiz() {
-      this.dataService.getQuizRecords( "question", "buildQuiz", this.studentId )
+      this.dataService.getQuizRecords( "quiz", "student", this.studentId )
       .subscribe(
         quiz => {
           this.quiz = quiz;
