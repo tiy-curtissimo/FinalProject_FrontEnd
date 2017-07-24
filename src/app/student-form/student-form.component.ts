@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, ViewChild }      from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../data.service'
@@ -31,7 +31,8 @@ export class StudentFormComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -53,22 +54,26 @@ export class StudentFormComponent implements OnInit {
   //saves student to the databbase using the service to call the api
   //if we had a id on the form and it is a number then edit otherwise create
   saveStudent(student: NgForm){
-    console.log("studentId = " + student.value.studentId)
+    //console.log("Student Id in student-form.componet.ts: " + student.value.studentId);
+
     if(typeof student.value.studentId === "number"){
-      console.log("Update by ID " + student.value.studentId)
+      console.log("saveStudent - Update by ID " + student.value.studentId)
       this.dataService.editStudentRecord("student", student.value, student.value.studentId)
           .subscribe(
             student => this.successMessage = "Record updated successfully",
             error =>  this.errorMessage = <any>error);
     }else{
-      console.log("Adding Student")
+      console.log("saveStudent - Adding New Student")
       this.dataService.addStudentRecord("student", student.value)
           .subscribe(
             student => this.successMessage = "Record added successfully",
             error =>  this.errorMessage = <any>error);
             this.student = {};
     }
+        localStorage.setItem('studentId', student.value.studentId);
+        this.router.navigate( ['/quiz'] );
   }
+
 
   //everything below here is form validation boiler plate
   ngAfterViewChecked() {
@@ -127,8 +132,7 @@ export class StudentFormComponent implements OnInit {
   validationMessages = {
     'email': {
       'required': 'Email is required',
-      'minlength': 'Email must be at least 2 characters long',
-      'maxlength': 'Email cannot be more than 50 characters long'
+      'pattern': 'Invalid Email Format'
     },
     'firstName': {
       'required': 'First name is required',

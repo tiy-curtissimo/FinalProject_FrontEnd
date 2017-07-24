@@ -7,7 +7,7 @@
 
 <br /><br /><br /><br /><br />
 <a class="btn btn-primary" routerLink="/student">Return to Student Login</a>
-<!-- <h1>Student Registration</h1> -->
+<br /><br />
 
 <div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage" id="deletemsg">
     {{errorMessage}} {{successMessage}}
@@ -35,7 +35,7 @@
   <div class="form-group">
     <label for="email" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-4">
-      <input [ngModel]="student?.email" ngModel #first_name="ngModel" type="text" class="form-control" id="email" name="email" placeholder="Email" required minlength="2" maxlength="50">
+      <input [ngModel]="student?.email" ngModel #email="ngModel" type="text" class="form-control" id="email" name="email" placeholder="Email" required minlength="2" maxlength="50" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$">
          <span *ngIf="formErrors.email" class="text-danger">
           {{ formErrors.email }}
       </span>
@@ -65,7 +65,7 @@
   <div class="form-group">
     <label for="university" class="col-sm-2 control-label">University</label>
     <div class="col-sm-4">
-      <select [ngModel]="student?.university" ngModel #major_id="ngModel" class="form-control" name="university" id="university" required>
+      <select [ngModel]="student?.university" ngModel #university="ngModel" class="form-control" name="university" id="university" required>
         <option value="Indiana University">Indiana University</option>
         <option value="Indiana State University">Indiana State University</option>
         <option value="Purdue University">Purdue University</option>
@@ -102,20 +102,20 @@
     </div>
   </div>
 
-    <div class="form-group">
-      <label for="gpa" class="col-sm-2 control-label">GPA</label>
-      <div class="col-sm-4">
-        <input [ngModel]="student?.gpa" ngModel #gpa="ngModel" type="text" class="form-control" id="gpa" name="gpa" placeholder="4.0" required maxLength="4" pattern="\d+\.\d+">
-        <span *ngIf="formErrors.gpa" class="text-danger">
+  <div class="form-group">
+    <label for="gpa" class="col-sm-2 control-label">GPA</label>
+    <div class="col-sm-4">
+      <input [ngModel]="student?.gpa" ngModel #gpa="ngModel" type="text" class="form-control" id="gpa" name="gpa" placeholder="4.0" required maxLength="5" pattern="\d+\.\d+">
+      <span *ngIf="formErrors.gpa" class="text-danger">
           {{ formErrors.gpa }}
-        </span>
-      </div>
+      </span>
     </div>
+  </div>
 
   <div class="form-group">
     <label for="phoneNumber" class="col-sm-2 control-label">Phone Number</label>
     <div class="col-sm-4">
-      <input [ngModel]="student?.phoneNumber" ngModel #last_name="ngModel" type="text" class="form-control" id="phoneNumber" name="phoneNumber"  placeholder="###-###-####" required minlength="2" maxlength="15">
+      <input [ngModel]="student?.phoneNumber" ngModel #phoneNumber="ngModel" type="text" class="form-control" id="phoneNumber" name="phoneNumber"  placeholder="###-###-####" required minlength="2" maxlength="15">
       <span *ngIf="formErrors.phoneNumber" class="text-danger">
           {{ formErrors.phoneNumber }}
       </span>
@@ -123,58 +123,13 @@
   </div>
 
   <div class="form-group">
-    <label for="graduationMonth" class="col-sm-2 control-label">Graduation MM</label>
+    <label for="graduationMonth" class="col-sm-2 control-label" placeholder="Enter Date">Graduation Date</label>
     <div class="col-sm-4">
-      <select [ngModel]="student?.graduationMonth" ngModel #major_id="ngModel" class="form-control" name="graduationMonth" id="graduationMonth" required>
-        <option value="January">January</option>
-        <option value="February">February</option>
-        <option value="March">March</option>
-        <option value="April">April</option>
-        <option value="May">May</option>
-        <option value="June">June</option>
-        <option value="July">July</option>
-        <option value="August">August</option>
-        <option value="September">September</option>
-        <option value="October">October</option>
-        <option value="November">November</option>
-        <option value="December">December</option>
-      </select>
+      <input type="date" [(ngModel)]="student.graduationMonth">
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="graduationYear" class="col-sm-2 control-label">Graduation YYYY</label>
-    <div class="col-sm-4">
-      <select [ngModel]="student?.graduationYear" ngModel #major_id="ngModel" class="form-control" name="graduationYear" id="graduationYear" required>
-        <option value="2022">2022</option>        
-        <option value="2021">2021</option>
-        <option value="2020">2020</option>
-        <option value="2019">2019</option>
-        <option value="2018">2018</option>
-        <option value="2017">2017</option>
-        <option value="2016">2016</option>
-        <option value="2015">2015</option>
-        <option value="2014">2014</option>
-        <option value="2013">2013</option>
-        <option value="2012">2012</option>
-        <option value="2011">2011</option>
-        <option value="2010">2010</option>
-        <option value="2009">2009</option>
-        <option value="2008">2008</option>
-        <option value="2007">2007</option>
-        <option value="2006">2006</option>
-        <option value="2005">2005</option>
-        <option value="2004">2004</option>
-        <option value="2003">2003</option>
-        <option value="2002">2002</option>
-        <option value="2001">2001</option>
-        <option value="2000">2000</option>
-        <option value="Other">Other</option>        
-      </select>
-    </div>
-  </div>
-
-  <div class="form-group">
+    <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button [disabled]="!studentForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
     </div>

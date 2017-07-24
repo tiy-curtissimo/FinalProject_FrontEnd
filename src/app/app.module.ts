@@ -23,6 +23,8 @@ import { RecruiterFormComponent } from './recruiter-form/recruiter-form.componen
 import { RegisterComponent } from './register/register.component';
 import { EventComponent } from './event/event.component';
 import { EventFormComponent } from './event-form/event-form.component';
+import { ProspectComponent } from './prospect/prospect.component';
+import { QuizComponent } from './quiz/quiz.component';
 //import { EventRecruiterComponent } from './event-recruiter/event-recruiter.component';
 
 
@@ -41,6 +43,8 @@ import { EventFormComponent } from './event-form/event-form.component';
     RegisterComponent,
     EventComponent,
     EventFormComponent,
+    ProspectComponent,
+    QuizComponent
     // EventRecruiterComponent
 
   ],

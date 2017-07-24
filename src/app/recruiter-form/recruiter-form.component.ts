@@ -1,3 +1,4 @@
+
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -37,34 +38,24 @@ export class RecruiterFormComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .subscribe((params: Params) => {
-        (params['enterprise_id']) ? this.getRecordForEdit() : null;
+        (params['username']) ? this.getRecordForEdit() : null;
       });
   }
 
   getRecordForEdit(){
-    console.log("hola")
     this.route.params
-      .switchMap((params: Params) => this.dataService.getRecruiterRecordByEnterprise("recruiter", params['enterprise_id']))
+      .switchMap((params: Params) => this.dataService.getRecruiterRecord("recruiter", params['username']))
       .subscribe(
         recruiter => this.recruiter = recruiter,
         error =>  this.errorMessage = <any>error);
   }
-  
-  //saves recruiter to the databbase using the service to call the api
-  //if we had a id on the form and it is a number then edit otherwise create
-  saveRecruiter(recruiter: NgForm){
-    if(typeof recruiter.value.id === "number"){
-      this.dataService.editRecruiterRecord("recruiter", recruiter.value, recruiter.value.recruiter_id)
+
+  editRecruiter(recruiter: NgForm){
+    
+      this.dataService.editRecruiterRecord("recruiter", recruiter.value, recruiter.value.recruiterId)
           .subscribe(
             recruiter => this.successMessage = "Record updated successfully",
             error =>  this.errorMessage = <any>error);
-    }else{
-      this.dataService.addRecord("recruiter", recruiter.value)
-          .subscribe(
-            recruiter => this.successMessage = "Record added successfully",
-            error =>  this.errorMessage = <any>error);
-            this.recruiter = {};
-    }
   }
 
   // everything below here is form validation boiler plate
@@ -88,17 +79,19 @@ export class RecruiterFormComponent implements OnInit {
   }
 
   formErrors = {
-    'enterprise_id': '',
+    'username': '',
     'email': ''
   };
 
   validationMessages = {
-    'enterprise_id': {
-      'required': 'Enterprise ID is required.'
+    'username': {
+      'required': 'User Name is required.'
     },
     'email': {
       'required': 'Email is required.',
-      'minlength': 'Email must include @ symbol'
+      'pattern': 'Email must include @ symbol',
+      'minlength': 'Email must be at least 2 characters long',
+      'maxlength': 'Email cannot be more than 50 characters long'
     }
   };
 
