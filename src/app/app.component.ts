@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { StudentComponent } from './student/student.component'
-import { QuizComponent } from './quiz/quiz.component'
+import { StudentComponent } from './student/student.component';
+import { QuizComponent } from './quiz/quiz.component';
+import { RecruiterComponent } from './recruiter/recruiter.component';
+import { RegisterComponent } from './register/register.component';
+import { ProspectComponent } from './prospect/prospect.component';
 
 @Component({
   selector: 'app-root',

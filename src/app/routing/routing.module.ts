@@ -6,6 +6,13 @@ import { StudentFormComponent }   from '../student-form/student-form.component';
 
 import { QuizComponent }   from '../quiz/quiz.component';
 
+import { RecruiterComponent }   from '../recruiter/recruiter.component';
+import { RecruiterFormComponent }   from '../recruiter-form/recruiter-form.component';
+import { RegisterComponent }   from '../register/register.component';
+
+import { EventComponent }   from '../event/event.component';
+import { EventFormComponent }   from '../event-form/event-form.component';
+
 import { HomeComponent }   from '../home/home.component';
  
 const routes: Routes = [
@@ -17,10 +24,17 @@ const routes: Routes = [
   { path: 'student/add', component: StudentFormComponent },
 
   { path: 'quiz',  component: QuizComponent },
-
   { path: 'quiz/:email',  component: QuizComponent },
-  
-  { path: 'quiz/:studentId',  component: QuizComponent }
+  { path: 'quiz/:studentId',  component: QuizComponent },
+
+  { path: 'recruiter',  component: RecruiterComponent },
+  { path: 'recruiter/add', component: RecruiterFormComponent },
+  { path: 'register/add',  component: RegisterComponent },
+
+  { path: 'event',  component: EventComponent },
+  { path: 'recruiter/username/:enterprise_id', component: EventComponent },
+  { path: 'event/add', component: EventFormComponent },
+  { path: 'event/edit/:eventId', component: EventFormComponent }
 ];
  
 @NgModule({

@@ -16,6 +16,13 @@ import { StudentComponent } from './student/student.component';
 import { StudentFormComponent } from './student-form/student-form.component';
 
 import { QuizComponent } from './quiz/quiz.component';
+import { EventComponent } from './event/event.component';
+import { EventFormComponent } from './event-form/event-form.component';
+import { RecruiterComponent } from './recruiter/recruiter.component';
+import { RecruiterFormComponent } from './recruiter-form/recruiter-form.component';
+import { RegisterComponent } from './register/register.component';
+import { ProspectComponent } from './prospect/prospect.component';
+import { StatusMessageComponent } from './status-message/status-message.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +32,14 @@ import { QuizComponent } from './quiz/quiz.component';
     DeleteConfirmComponent,
     StudentComponent,
     StudentFormComponent,
-    QuizComponent
+    QuizComponent,
+    EventComponent,
+    EventFormComponent,
+    RecruiterComponent,
+    RecruiterFormComponent,
+    RegisterComponent,
+    ProspectComponent,
+    StatusMessageComponent
   ],
   imports: [
     BrowserModule,

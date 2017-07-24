@@ -1,0 +1,87 @@
+<section @fadeInAnimation>
+  <ol class="breadcrumb">
+    <li><a routerLink="/home">Home</a></li>
+    <li class="active">Recruiter Registration</li>
+    <li><a class="btn btn-primary" routerLink="/recruiter">Return to Recruiter Login</a></li>
+</ol>
+
+<br/>
+
+ <div [ngClass]="(errorMessage)?'alert alert-danger':'alert alert-success'" role="alert" *ngIf="errorMessage || successMessage" id="deletemsg">
+    {{errorMessage}} {{successMessage}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div> 
+
+<br><br><br><br>
+
+<h1>Recruiter Registration</h1>
+
+<br><br>
+
+    <form novalidate (ngSubmit)="saveRecruiter(registerForm)" #registerForm="ngForm" class="form-horizontal">
+    <input [ngModel]="recruiter?.recruiterId" ngModel #recruiterId="ngModel" type="hidden" name="recruiterId">    
+        <div class="form-group">
+      <label for="username" class="col-sm-2 control-label">User Name</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="username" type="text" class="form-control" id="username" name="username" placeholder="Enter User Name..." required>
+          <span *ngIf="formErrors.username" class="text-danger">
+            {{ formErrors.username }}
+        </span>
+      </div>
+    </div>
+
+        <div class="form-group">
+      <label for="password" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="password" type="text" class="form-control" id="password" name="password" placeholder="Enter Password..." required>
+          <span *ngIf="formErrors.password" class="text-danger">
+            {{ formErrors.password }}
+        </span>
+      </div>
+    </div>
+
+        <div class="form-group">
+      <label for="email" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="email" type="text" class="form-control" id="email" name="email" placeholder="Enter Email..." required>
+          <span *ngIf="formErrors.email" class="text-danger">
+            {{ formErrors.email }}
+        </span>
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label for="firstName" class="col-sm-2 control-label">First Name</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="firstName" type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name..." required>
+          <span *ngIf="formErrors.firstName" class="text-danger">
+            {{ formErrors.firstName }}
+        </span>
+      </div>
+    </div>
+    
+        <div class="form-group">
+      <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+      <div class="col-sm-4">
+        <input [(ngModel)]="lastName" type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name..." required>
+          <span *ngIf="formErrors.lastName" class="text-danger">
+            {{ formErrors.lastName }}
+        </span>
+      </div>
+    </div>
+
+        <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button [disabled]="!registerForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+  
+    </form>
+
+    <br><br>
+
+   
+    
+</section>
