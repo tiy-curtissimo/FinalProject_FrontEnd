@@ -45,6 +45,12 @@ export class ProspectComponent implements OnInit {
         error =>  this.errorMessage = <any>error);
   }
 
+//   $timeout(function() {
+//    $("#dataTable-buttons").dataTable({
+//    ...
+//    })
+// })
+
  
   
   //saves student to the databbase using the service to call the api

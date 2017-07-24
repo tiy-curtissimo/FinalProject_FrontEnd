@@ -35,13 +35,8 @@ export class RecruiterComponent implements OnInit {
 
   ngOnInit() {}
 
-  // authenticateLogin(recruiter: NgForm) {
-  //   console.log("id = " + recruiter.value.username);
-  //   console.log("password = " + recruiter.value.password);
-  // }
-
    authenticate(recruiter: NgForm) {
-    console.log("id = " + recruiter.value.username);
+    console.log("username = " + recruiter.value.username);
     console.log("password = " + recruiter.value.password);
       this.dataService.recruiterLogin("recruiter", recruiter.value)
           .subscribe(
