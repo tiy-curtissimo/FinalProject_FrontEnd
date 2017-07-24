@@ -11,8 +11,8 @@ import { fadeInAnimation } from '../animations/fade-in.animation';
 
 @Component({
   selector: 'app-event',
-  templateUrl: './event.component.html',
-  template: '<ng2-smart-table [settings]="settings" [source]="DataService"></ng2-smart-table>',
+  // templateUrl: './event.component.html',
+  template: '<ng2-smart-table [settings]="settings" [source]="events"></ng2-smart-table>',
   styleUrls: ['./event.component.css'],
   animations: [fadeInAnimation]
 })
@@ -38,15 +38,17 @@ export class EventComponent implements OnInit {
 
   errorMessage: string;
   successMessage: string;
-  events: any[];
+  events = [];
   recruiters : any[];
   mode = 'Observable';
  
   constructor (private dataService: DataService, public dialog: MdDialog) {}
 
-   ngOnInit() { this.getEventRecruiters(); }
+  ngOnInit() {
+    this.getEventRecruiters();
+  }
 
-  getEventRecruiters(){
+  getEventRecruiters() {
     this.dataService.getRecords("event/recruiters")
       .subscribe(
        events => this.events = events,
