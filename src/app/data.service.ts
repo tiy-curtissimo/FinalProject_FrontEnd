@@ -17,7 +17,6 @@ export class DataService {
     // ----------------------   --------  ---------------------
     // http://localhost:8080/   student   /dford@gmail.com/
     // http://localhost:8080/student/dford@gmail.com/
-    // http://localhost:8080/question/getQuestions
     // IMPORTANT: WHEN SENDING EMAIL ADDRESS IT MUST END WITH A '/'
 
 // **************************************************************************************
@@ -61,7 +60,6 @@ export class DataService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-
 
     // performed from quiz.component.ts to obtain quiz questions
     // http://localhost:8080//quiz/student/{studentId}
@@ -114,7 +112,6 @@ export class DataService {
             .catch(this.handleError);
     }
     
-
     addRecruiterRecord(endpoint: string, record:object): Observable<object> {
     let apiUrl = `${this.baseUrl}${endpoint}/add`;
     console.log(apiUrl)
@@ -143,7 +140,6 @@ export class DataService {
            .map(this.extractData)  //how to map data from API
            .catch(this.handleError);  // how to handle if it messes up
    }
-
 
 // **************************************************************************************
 //                               EVENTS PATH                                           *
