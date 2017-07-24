@@ -43,7 +43,6 @@ export class StudentFormComponent implements OnInit {
   }
 
   getRecordForEdit(){
-    //console.log("hola")
     this.route.params
       .switchMap((params: Params) => this.dataService.getStudentRecordByEmail("student", params['email']))
       .subscribe(
@@ -51,13 +50,14 @@ export class StudentFormComponent implements OnInit {
         error =>  this.errorMessage = <any>error);
   }
   
+
   //saves student to the databbase using the service to call the api
   //if we had a id on the form and it is a number then edit otherwise create
   saveStudent(student: NgForm){
     //console.log("Student Id in student-form.componet.ts: " + student.value.studentId);
 
     if(typeof student.value.studentId === "number"){
-      console.log("saveStudent - Update by ID " + student.value.studentId)
+      console.log("saveStudent - Update by ID: " + student.value.studentId)
       this.dataService.editStudentRecord("student", student.value, student.value.studentId)
           .subscribe(
             student => this.successMessage = "Record updated successfully",
@@ -70,9 +70,12 @@ export class StudentFormComponent implements OnInit {
             error =>  this.errorMessage = <any>error);
             this.student = {};
     }
-        localStorage.setItem('studentId', student.value.studentId);
+
+        console.log("Student Email is: " + student.value.email);
+        localStorage.setItem('email', student.value.email);
         this.router.navigate( ['/quiz'] );
   }
+
 
 
   //everything below here is form validation boiler plate

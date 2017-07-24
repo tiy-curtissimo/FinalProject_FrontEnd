@@ -37,40 +37,34 @@
                         <div class="panel-heading" id="ph">
                             <h3 class="panel-title">{{question.question}}</h3>
                         </div>
+                        <div class="radio">
 
-                             <div class="radio">
-                                <label>
-                                    &nbsp;&nbsp;
-                                    <input [ngModel]="question.choiceA" ngModel #choiceA="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceA}}" [value]="">{{question.choiceA}} 
-                                </label><br/>
+                            <label>
+                                &nbsp;&nbsp;
+                                <input ngModel #choiceA="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceA}}" [value]="question.choiceA" (change)="onSelectionChange(question, 'choiceA')" required>{{question.choiceA}} 
+                            </label><br/>
 
-                                <label>
-                                    &nbsp;&nbsp;
-                                    <input [ngModel]="question.choiceB" ngModel #choiceB="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceB}}" [value]="">{{question.choiceB}} 
-                                </label><br/>
+                            <label>
+                                &nbsp;&nbsp;
+                                <input ngModel #choiceB="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceB}}" [value]="question.choiceB" (change)="onSelectionChange(question, 'choiceB')" required>{{question.choiceB}} 
+                            </label><br/>
 
-                                <label>
-                                    &nbsp;&nbsp;
-                                    <input [ngModel]="question.choiceC" ngModel #choiceC="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceC}}" [value]="">{{question.choiceC}} 
-                                </label><br/>
+                            <label>
+                                &nbsp;&nbsp;
+                                <input ngModel #choiceC="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceC}}" [value]="question.choiceC" (change)="onSelectionChange(question, 'choiceC')" required>{{question.choiceC}} 
+                            </label><br/>
 
-                                <label>
-                                    &nbsp;&nbsp;
-                                    <input [ngModel]="question.choiceD" ngModel #choiceD="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceD}}" [value]="">{{question.choiceD}} 
-                                </label><br/>
+                            <label>
+                                &nbsp;&nbsp;
+                                <input ngModel #choiceD="ngModel" type="radio" name={{question.questionId}} id="{{question.choiceD}}" [value]="question.choiceD" (change)="onSelectionChange(question, 'choiceD')" required>{{question.choiceD}} 
+                            </label><br/>
 
-                                <label>
-                                    &nbsp;&nbsp;
-                                    <input [ngModel]="question.noneOfTheAbove" ngModel #noneOfTheAbove="ngModel" type="radio" name={{question.questionId}}  id="{{question.questionId}}" [value]="">{{question.noneOfTheAbove}} 
-                                </label><br/>
-                            </div> 
+                            <label>
+                                &nbsp;&nbsp;
+                                <input ngModel #noneOfTheAbove="ngModel" type="radio" name={{question.questionId}}  id="{{question.noneOfTheAbove}}" required [value]="question.noneOfTheAbove" (change)="onSelectionChange(question, 'noneOfTheAbove')" >{{question.noneOfTheAbove}} 
+                            </label><br/>
 
-                         <!-- <div class="panel-body">
-                             <select name={{question.questionId}} id="question" required>
-                                 <option *ngFor="let question of questions.question" [value]=""></option>
-                            </select>
-                        </div>   -->
-
+                         </div>   <!-- end radio buttons --> 
                     </div> <!-- end panel-primary -->
                 </div>  <!-- end box -->
             </div> <!-- end row -->

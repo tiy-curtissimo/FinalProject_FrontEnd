@@ -17,6 +17,10 @@ export class QuizComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
 
+  entries = [];
+  selectedEntry: any;
+  choice: string;
+
   questions: object = {};
 
   quiz: object = {};
@@ -26,6 +30,7 @@ export class QuizComponent implements OnInit {
   mode = 'Observable';
 
   studentId: string;
+  email: string;
 
   constructor(
     private dataService: DataService,
@@ -35,13 +40,14 @@ export class QuizComponent implements OnInit {
   ) {}
 
   ngOnInit() { 
-    this.studentId = localStorage.getItem('studentId') || null;
+    this.email = localStorage.getItem('email') || null;
     this.getQuiz();
   }
 
-  // http://localhost:8080//quiz/student/{studentId}
+  // http://localhost:8080//quiz/student/{email}
   getQuiz() {
-      this.dataService.getQuizRecords( "quiz", "student", this.studentId )
+      console.log("in getQuiz - email is " + this.email);
+      this.dataService.getQuizRecords( "quiz", "student", this.email )
       .subscribe(
         quiz => {
           this.quiz = quiz;
@@ -60,9 +66,27 @@ export class QuizComponent implements OnInit {
   //     "finalScore":3
   // }
   saveQuiz(quizForm: NgForm) {
-    console.log("quizId: " + quizForm.value.quizId);
-
-    console.log(quizForm)
+    console.log(this.entries);
+    console.log("---------------- in saveQuiz() ---------------------")
+    console.log("for quizId " + quizForm.value.quizId);
+    for (let i = 0; i < this.entries.length; i++) {
+      console.log("question number is " + this.entries[i].questionId + " and user chose " + this.entries[i].select);
+    }
   }
+
+    onSelectionChange(entry, choice) {
+      this.selectedEntry = entry;
+      this.selectedEntry["select"] = choice;
+
+      for (let i = 0; i < this.entries.length; i++) {
+        if (this.selectedEntry.questionId == this.entries[i].questionId) {
+            this.entries[i] = this.selectedEntry;
+            console.log("question " + this.selectedEntry.questionId + " already exists in array - overlaying");
+            return;
+        }
+      }
+      console.log("question " + this.selectedEntry.questionId + " does not exist in array - pushing");
+      this.entries.push(this.selectedEntry);
+    }
 
 }
