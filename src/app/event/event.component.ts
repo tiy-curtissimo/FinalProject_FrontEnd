@@ -1,17 +1,40 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
+import  { BrowserModule}  from '@angular/platform-browser'
+// import { SearchFilter } from './searchFilter.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { DataService } from '../data.service'
 import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component'
 import { fadeInAnimation } from '../animations/fade-in.animation';
 
+
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
+  template: '<ng2-smart-table [settings]="settings" [source]="DataService"></ng2-smart-table>',
   styleUrls: ['./event.component.css'],
   animations: [fadeInAnimation]
 })
+
 export class EventComponent implements OnInit {
+
+    settings = {
+    columns: {
+      id: {
+        title: 'Event ID'
+      },
+      eventDate: {
+        title: 'Event Date'
+      },
+      eventName: {
+        title: 'Event Name'
+      },
+      recruiter: {
+        title: 'Recruiter'
+      }
+    }
+  };
 
   errorMessage: string;
   successMessage: string;
