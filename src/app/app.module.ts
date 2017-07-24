@@ -11,7 +11,6 @@ import { AppRoutingModule } from './routing/routing.module';
 import { HomeComponent } from './home/home.component';
 import { DataService } from './data.service';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
-import { TreeTableModule, DataTableModule, SharedModule, MultiSelectModule } from 'primeng/primeng';
 import { StatusMessageComponent } from './status-message/status-message.component';
 import {CommonModule} from '@angular/common';
 
@@ -55,10 +54,7 @@ import { QuizComponent } from './quiz/quiz.component';
     MaterialModule,
     BrowserAnimationsModule,
     FormsModule,
-    DataTableModule,
-    SharedModule,
-    MultiSelectModule,
-    TreeTableModule,
+    
   ],
   entryComponents: [DeleteConfirmComponent],
   providers: [DataService],
